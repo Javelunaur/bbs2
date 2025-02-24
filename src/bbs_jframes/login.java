@@ -32,16 +32,17 @@ public class login extends javax.swing.JFrame {
         Signuplinker = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         forgotpass = new javax.swing.JLabel();
-        pass = new javax.swing.JLabel();
-        usern = new javax.swing.JLabel();
-        loginborder = new javax.swing.JLabel();
+        forgotpass1 = new javax.swing.JLabel();
+        forgotpass2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         Appname = new javax.swing.JLabel();
         tagline2 = new javax.swing.JLabel();
         tagline1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(229, 218, 218));
+        jPanel1.setBackground(new java.awt.Color(146, 80, 80));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(255, 255, 255)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -51,7 +52,7 @@ public class login extends javax.swing.JFrame {
         Signuplinker.setFont(new java.awt.Font("Times New Roman", 0, 9)); // NOI18N
         Signuplinker.setText("No Account yet? Sign Up!");
         Signuplinker.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(Signuplinker, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 110, -1));
+        jPanel2.add(Signuplinker, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(183, 206, 229));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "LOGIN", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(53, 76, 112))); // NOI18N
@@ -61,57 +62,75 @@ public class login extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 110, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 90, 20));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 120, 20));
 
-        forgotpass.setFont(new java.awt.Font("Times New Roman", 0, 10)); // NOI18N
-        forgotpass.setText("Forgot password?");
+        forgotpass.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        forgotpass.setForeground(new java.awt.Color(102, 102, 102));
+        forgotpass.setText("Password");
         jPanel2.add(forgotpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
-        pass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pass.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 150, 20));
+        forgotpass1.setFont(new java.awt.Font("Times New Roman", 0, 10)); // NOI18N
+        forgotpass1.setText("Forgot password?");
+        jPanel2.add(forgotpass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
 
-        usern.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        usern.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel2.add(usern, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 20));
+        forgotpass2.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        forgotpass2.setForeground(new java.awt.Color(102, 102, 102));
+        forgotpass2.setText("Username");
+        jPanel2.add(forgotpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        loginborder.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true), "LOGIN", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 18), new java.awt.Color(42, 9, 9))); // NOI18N
-        jPanel2.add(loginborder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 230));
+        jTextField2.setBackground(new java.awt.Color(243, 234, 234));
+        jTextField2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 240, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 190, 230));
+        jTextField1.setBackground(new java.awt.Color(243, 234, 234));
+        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 240, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 280, 210));
 
         Appname.setBackground(new java.awt.Color(0, 0, 0));
         Appname.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         Appname.setForeground(new java.awt.Color(183, 206, 229));
         Appname.setText("iBook");
-        jPanel1.add(Appname, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        jPanel1.add(Appname, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
+        tagline2.setForeground(new java.awt.Color(255, 255, 255));
         tagline2.setText("seamless experiences..");
-        jPanel1.add(tagline2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 120, -1));
+        jPanel1.add(tagline2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 120, -1));
 
+        tagline1.setForeground(new java.awt.Color(255, 255, 255));
         tagline1.setText("Where your plans meet");
-        jPanel1.add(tagline1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 120, -1));
+        jPanel1.add(tagline1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 120, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,13 +171,14 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel Appname;
     private javax.swing.JLabel Signuplinker;
     private javax.swing.JLabel forgotpass;
+    private javax.swing.JLabel forgotpass1;
+    private javax.swing.JLabel forgotpass2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel loginborder;
-    private javax.swing.JLabel pass;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel tagline1;
     private javax.swing.JLabel tagline2;
-    private javax.swing.JLabel usern;
     // End of variables declaration//GEN-END:variables
 }
