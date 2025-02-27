@@ -4,9 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/config/dbConnector.java</file>
-            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/bbs_jframes/login.java</file>
-            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/bbs_jframes/register.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/ADMIN/user_form.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/AUTHEN/register.java</file>
+            <file>jar:file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/xternalpx/rs2xml.jar!/src/net/proteanit/sql/DbUtils.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/ADMIN/a_dash.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/AUTHEN/login.java</file>
         </group>
     </open-files>
 </project-private>

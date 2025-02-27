@@ -61,7 +61,7 @@ public class login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(243, 234, 234));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Signuplinker.setFont(new java.awt.Font("Times New Roman", 0, 9)); // NOI18N
+        Signuplinker.setFont(new java.awt.Font("Times New Roman", 2, 9)); // NOI18N
         Signuplinker.setForeground(new java.awt.Color(146, 80, 80));
         Signuplinker.setText("Sign up!");
         Signuplinker.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -179,13 +179,12 @@ public class login extends javax.swing.JFrame {
             a_dash admin = new a_dash();
             admin.setVisible(true);
             this.dispose();
-        } else {
-             JOptionPane.showMessageDialog(null,"Login Failed!");
-        }
+            }else {
+             JOptionPane.showMessageDialog(null,"[ERROR] Account may not exist.!"); }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void SignuplinkerAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_SignuplinkerAncestorAdded
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_SignuplinkerAncestorAdded
 
     private void SignuplinkerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignuplinkerMouseClicked

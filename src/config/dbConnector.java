@@ -19,22 +19,39 @@ public class dbConnector {
             }
         }
         
-         public int insertData(String sql){
-            int result;
-            try{
-                PreparedStatement pst = connect.prepareStatement(sql);
-                pst.executeUpdate();
-                System.out.println("Inserted Successfully!");
-                pst.close();
-                result =1;
-            }catch(SQLException ex){
-                System.out.println("Connection Error: "+ex);
-                result =0;
-            }
-            return result;
-        }
-         
-                 public ResultSet getData(String sql) throws SQLException{
+//         public int insertData(String sql){
+//            int result;
+//            try{
+//                PreparedStatement pst = connect.prepareStatement(sql);
+//                pst.executeUpdate();
+//                System.out.println("Inserted Successfully!");
+//                pst.close();
+//                result =1;
+//            }catch(SQLException ex){
+//                System.out.println("Connection Error: "+ex);
+//                result =0;
+//            }
+//            return result;
+//        }
+//         
+
+                 
+  public int insertData(String sql){
+    int result;
+    try {
+        PreparedStatement pst = connect.prepareStatement(sql);
+        pst.executeUpdate();
+        System.out.println("Inserted Successfully!");
+        pst.close();
+        result = 1;  // If insertion is successful, set result to 1
+    } catch (SQLException ex) {
+        System.out.println("Connection Error: " + ex);
+        result = 0;  // If there is an error, set result to 0
+    }
+    return result;
+}
+  
+           public ResultSet getData(String sql) throws SQLException{
             Statement stmt = connect.createStatement();
             ResultSet rst = stmt.executeQuery(sql);
             return rst;
