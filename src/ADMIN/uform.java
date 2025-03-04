@@ -16,7 +16,7 @@ public class uform extends javax.swing.JFrame {
         public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT userID, u_role, fname, lname, u_name, u_email, u_phone, u_address, u_pass FROM tbl_user");
+            ResultSet rs = dbc.getData("SELECT userID, u_role, fname, lname, u_name, u_email, u_phone, u_address, u_pass, u_status FROM tbl_user");
             u_tbl.setModel(DbUtils.resultSetToTableModel(rs));
             rs.close();
         }catch(SQLException ex){
@@ -34,6 +34,7 @@ public class uform extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         Appname = new javax.swing.JLabel();
         Appname1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         u_tbl = new javax.swing.JTable();
 
@@ -49,13 +50,24 @@ public class uform extends javax.swing.JFrame {
         Appname.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         Appname.setForeground(new java.awt.Color(183, 206, 229));
         Appname.setText("iBook");
-        jPanel4.add(Appname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        jPanel4.add(Appname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         Appname1.setBackground(new java.awt.Color(0, 0, 0));
         Appname1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         Appname1.setForeground(new java.awt.Color(183, 206, 229));
         Appname1.setText("USER FORM");
         jPanel4.add(Appname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, -1));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("BACK >>");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 40));
 
@@ -98,6 +110,12 @@ public class uform extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        a_dash admin = new a_dash();
+        admin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -136,6 +154,7 @@ public class uform extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Appname;
     private javax.swing.JLabel Appname1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

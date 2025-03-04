@@ -1,6 +1,8 @@
 package AUTHEN;
 
 import ADMIN.a_dash;
+import USER.g_dash;
+import USER.h_dash;
 import config.dbConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,17 +24,55 @@ public class login extends javax.swing.JFrame {
         logo2.setIcon(new ImageIcon(image));
         
     }
+    
+    static String status;
+    static String role;
+    
        public static boolean loginAcc(String username, String password){
        dbConnector connector = new dbConnector();
        try{
           String query = "SELECT * FROM tbl_user WHERE u_name = '" + username + "' AND u_pass = '" + password + "'";
           ResultSet resultSet = connector.getData(query);
-          return resultSet.next();
+          if (resultSet.next()){
+              status = resultSet.getString("u_status");
+              role = resultSet.getString("u_role");
+              return true;
+       }else {
+               return false;
+            }
+       
        }catch (SQLException ex){
            return false;
        }
        }
-    @SuppressWarnings("unchecked")
+       
+       
+       
+//           static String status;
+//    static String type;
+//    
+//   public static boolean loginAcc(String username, String password){
+//       
+//      
+//        dbConnector connector = new dbConnector();
+//        try {
+//            String query = "SELECT * FROM tbl_user WHERE user_username = '" + username + "' AND user_pass = '" + password + "'";
+//            ResultSet resultSet = connector.getData(query);
+//            if (resultSet.next()){
+//                status = resultSet.getString("user_stats");
+//                type = resultSet.getString("user_type");
+//                return true;
+//            }else {
+//                return false;
+//            }
+//            
+//            
+//            
+//        }  catch (SQLException ex) {
+//                    return false;
+//                    }
+//        }
+//    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -174,13 +214,28 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_userActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            if (loginAcc(user.getText(),pass.getText())){
+        if (loginAcc(user.getText(),pass.getText())){
+             if(status.equals("Active")){
             JOptionPane.showMessageDialog(null,"Login Success! Redirecting..");
-            a_dash admin = new a_dash();
-            admin.setVisible(true);
-            this.dispose();
-            }else {
+              if(role.equals("Admin")){
+                a_dash admin = new a_dash();
+                admin.setVisible(true);
+                this.dispose();    
+              }else if(role.equals("Host")){
+              h_dash host = new h_dash();
+              host.setVisible(true);
+              this.dispose();
+              }else if(role.equals("Guest")){
+              g_dash guest = new g_dash();
+              guest.setVisible(true);
+              this.dispose();
+              }
+             }else{
+            JOptionPane.showMessageDialog(null,"[ERROR] Inactive Account Detected. Please contact an admin.");
+            } 
+        }else {
              JOptionPane.showMessageDialog(null,"[ERROR] Account may not exist.!"); }
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void SignuplinkerAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_SignuplinkerAncestorAdded

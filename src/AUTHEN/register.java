@@ -298,34 +298,35 @@ public class register extends javax.swing.JFrame {
         dbConnector dbc = new dbConnector();
         String firstName = fn.getText(), lastName = ln.getText(), username = u_name.getText(), email = u_email.getText(), address = u_location.getText(), conf =  pass2.getText().trim(), password = pass.getText().trim(), contact = phone.getText(), role = u_role.getSelectedItem().toString();
         
-        if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contact.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all required fields.");
             return;
-        }if (password.length() < 8 || !password.equals(conf) || conf.length() < 8) {
+        }else if (password.length() < 8 || !password.equals(conf) || conf.length() < 8) {
             if(password.length()< 8 || conf.length()<8){
                 JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
-                return;
+                
             }else{
                 JOptionPane.showMessageDialog(null, "Passwords do not match.");
-                return;
+               
             }   
-        }if (!contact.matches("[0-9]+")) {
+        }else if (!contact.matches("[0-9]+")) {
             JOptionPane.showMessageDialog(null, "Contact number should only contain numbers.");
-            return;
-        }if (role == null || role.equals("Roles")) {
+            
+        }else if (role == null || role.equals("Roles")) {
             JOptionPane.showMessageDialog(null, "Please select a valid role (Host, Admin, or Guest).");
-            return;
+            
         }else if(dupCheck()){
             System.out.println("[ERROR]Duplicate Found.");
         }else{
-       if (dbc.insertData("INSERT INTO tbl_user (fname, lname, u_name, u_email, u_address, u_pass, u_role, u_phone) VALUES ('" 
+       if (dbc.insertData("INSERT INTO tbl_user (fname, lname, u_name, u_email, u_address, u_pass, u_role, u_phone, u_status) VALUES ('" 
     + fn.getText() + "', '" 
     + ln.getText() + "', '" 
     + u_name.getText() + "', '" 
     + u_email.getText() + "', '" 
     + u_location.getText() + "', '" 
     + pass2.getText() + "', '" 
-    + u_role.getSelectedItem() + "', '"+phone.getText()+"')") > 0) { 
+    + u_role.getSelectedItem() + "', '"
+    +phone.getText()+"', 'Pending')") > 0) { 
     JOptionPane.showMessageDialog(null,"Registered Successfully.");
     login log = new login();
     log.setVisible(true);
