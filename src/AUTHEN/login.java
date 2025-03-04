@@ -175,7 +175,7 @@ public class login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             if (loginAcc(user.getText(),pass.getText())){
-            JOptionPane.showMessageDialog(null,"Login Success! Redircting..");
+            JOptionPane.showMessageDialog(null,"Login Success! Redirecting..");
             a_dash admin = new a_dash();
             admin.setVisible(true);
             this.dispose();

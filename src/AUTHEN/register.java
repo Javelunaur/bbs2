@@ -330,7 +330,8 @@ public class register extends javax.swing.JFrame {
     login log = new login();
     log.setVisible(true);
     this.dispose();
-} else {
+} 
+       else {
     JOptionPane.showMessageDialog(null,"Registration Failed..");
 } 
  }
