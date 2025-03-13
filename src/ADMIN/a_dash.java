@@ -25,7 +25,7 @@ public class a_dash extends javax.swing.JFrame {
         Image image1 = icon1.getImage().getScaledInstance(avatar.getWidth(), avatar.getHeight(), Image.SCALE_SMOOTH);
         avatar.setIcon(new ImageIcon(image1));
     }
-    
+    Color def = new Color(153,153,153);
     Color exit = new Color(255,255,255);
     Color hover = new Color(146,80,80);
         
@@ -37,7 +37,7 @@ public class a_dash extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         search = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        srch = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         Appname2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -74,16 +74,21 @@ public class a_dash extends javax.swing.JFrame {
 
         search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/search.png"))); // NOI18N
         search.setText("     ");
-        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 20, 20));
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 20, 20));
 
-        jTextField1.setText("   ");
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 80, 80)));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        srch.setText("   ");
+        srch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 80, 80)));
+        srch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                srchFocusLost(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 420, 20));
+        srch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srchActionPerformed(evt);
+            }
+        });
+        jPanel1.add(srch, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 420, 20));
 
         jPanel4.setBackground(new java.awt.Color(146, 80, 80));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -267,9 +272,9 @@ public class a_dash extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_outMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void srchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_srchActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Session ses = Session.getInstance();
@@ -331,6 +336,11 @@ public class a_dash extends javax.swing.JFrame {
         out.setForeground(exit);
     }//GEN-LAST:event_outMouseExited
 
+    private void srchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_srchFocusLost
+        srch.setForeground(def);
+        srch.setText("Browse");
+    }//GEN-LAST:event_srchFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -386,11 +396,11 @@ public class a_dash extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel list;
     private javax.swing.JLabel out;
     private javax.swing.JLabel search;
     public javax.swing.JLabel sett;
+    private javax.swing.JTextField srch;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,13 +29,13 @@ public class login extends javax.swing.JFrame {
     static String status;
     static String role;
     
-       public static boolean loginAcc(String username, String password){
+       public static boolean loginAcc(String username, String email, String password){
        
        dbConnector connector = new dbConnector();
        
        
        try{
-          String query = "SELECT * FROM tbl_user WHERE u_name = '" + username + "' AND u_pass = '" + password + "'";
+          String query = "SELECT * FROM tbl_user WHERE u_name = '" + username + "' OR u_email = '" + email + "' AND u_pass = '" + password + "' ";
           ResultSet resultSet = connector.getData(query);
           if (resultSet.next()){
               status = resultSet.getString("u_status");
@@ -63,13 +63,11 @@ public class login extends javax.swing.JFrame {
        }
        }
        
-       
-       
-
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         Signuplinker = new javax.swing.JLabel();
         forgotpass = new javax.swing.JLabel();
@@ -83,8 +81,8 @@ public class login extends javax.swing.JFrame {
         Appname = new javax.swing.JLabel();
         tagline2 = new javax.swing.JLabel();
         tagline1 = new javax.swing.JLabel();
-        logo2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        logo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -92,6 +90,10 @@ public class login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(146, 80, 80));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(255, 255, 255)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jTextField1.setBorder(null);
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(243, 234, 234));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,7 +151,7 @@ public class login extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(214, 223, 231));
         jButton1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(183, 206, 229));
+        jButton1.setForeground(new java.awt.Color(134, 163, 194));
         jButton1.setText("LOGIN");
         jButton1.setBorder(null);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -172,8 +174,8 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(Signuplinker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         Appname1.setBackground(new java.awt.Color(0, 0, 0));
-        Appname1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        Appname1.setForeground(new java.awt.Color(162, 194, 226));
+        Appname1.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        Appname1.setForeground(new java.awt.Color(134, 163, 194));
         Appname1.setText("LOGIN");
         jPanel2.add(Appname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, 30));
 
@@ -193,12 +195,12 @@ public class login extends javax.swing.JFrame {
         tagline1.setText("Where your plans meet");
         jPanel1.add(tagline1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 180, -1));
 
-        logo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/logo2.png"))); // NOI18N
-        logo2.setText("jLabel2");
-        jPanel1.add(logo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 200, 210));
-
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 300, 260));
+
+        logo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/logowhite.png"))); // NOI18N
+        logo2.setText("   ");
+        jPanel1.add(logo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 190, 170));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,10 +222,11 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_userActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (loginAcc(user.getText(),pass.getText())){
+        if (loginAcc(user.getText(), user.getText(), pass.getText())){
              if(status.equals("Active")){
             JOptionPane.showMessageDialog(null,"Login Success! Redirecting..");
-              if(role.equals("Admin")){
+              
+            if(role.equals("Admin")){
                 a_dash admin = new a_dash();
                 admin.setVisible(true);
                 this.dispose();    
@@ -240,7 +243,7 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"[ERROR] Inactive Account Detected. Please contact an admin.");
             } 
         }else {
-             JOptionPane.showMessageDialog(null,"[ERROR] Account may not exist.!"); }
+             JOptionPane.showMessageDialog(null,"[ERROR] Account does not exist.!"); }
             
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -305,6 +308,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel logo2;
     private javax.swing.JPasswordField pass;
     private javax.swing.JLabel tagline1;

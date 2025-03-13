@@ -142,7 +142,7 @@ public class useradd extends javax.swing.JFrame {
 
         add.setBackground(new java.awt.Color(214, 223, 231));
         add.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
-        add.setForeground(new java.awt.Color(183, 206, 229));
+        add.setForeground(new java.awt.Color(134, 163, 194));
         add.setText("ADD");
         add.setBorder(null);
         add.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -160,7 +160,7 @@ public class useradd extends javax.swing.JFrame {
 
         upd.setBackground(new java.awt.Color(214, 223, 231));
         upd.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
-        upd.setForeground(new java.awt.Color(183, 206, 229));
+        upd.setForeground(new java.awt.Color(134, 163, 194));
         upd.setText("UPDATE");
         upd.setBorder(null);
         upd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -178,7 +178,7 @@ public class useradd extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(214, 223, 231));
         jButton5.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(183, 206, 229));
+        jButton5.setForeground(new java.awt.Color(134, 163, 194));
         jButton5.setText("CLEAR");
         jButton5.setBorder(null);
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -365,7 +365,7 @@ public class useradd extends javax.swing.JFrame {
         addPANE.add(u_location, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 510, 30));
 
         u_status.setFont(new java.awt.Font("Trebuchet MS", 1, 11)); // NOI18N
-        u_status.setForeground(new java.awt.Color(183, 206, 229));
+        u_status.setForeground(new java.awt.Color(134, 163, 194));
         u_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Status", "Active", "Pending" }));
         u_status.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(183, 206, 229), 2, true));
         u_status.addActionListener(new java.awt.event.ActionListener() {
@@ -394,7 +394,7 @@ public class useradd extends javax.swing.JFrame {
         addPANE.add(mn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 120, 30));
 
         u_role.setFont(new java.awt.Font("Trebuchet MS", 1, 11)); // NOI18N
-        u_role.setForeground(new java.awt.Color(183, 206, 229));
+        u_role.setForeground(new java.awt.Color(134, 163, 194));
         u_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Roles", "Host", "Guest", "Admin" }));
         u_role.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(183, 206, 229), 2, true));
         u_role.addActionListener(new java.awt.event.ActionListener() {
@@ -552,9 +552,12 @@ public class useradd extends javax.swing.JFrame {
         }else{    
           dbConnector dbc = new dbConnector();
           dbc.updateData("UPDATE tbl_user SET fname = '"+fn.getText()+"', lname = '"+ln.getText()+"', mname = '"+mn.getText()+"',               "
-                +    "u_email = '"+u_email.getText()+"', u_phone = '"+phone.getText()+"', u_address = '"+u_location.getText()+"',             "
-                +    "u_name = '"+u_name.getText()+"', u_role = '"+u_role.getSelectedItem()+"', u_status = '"+u_status.getSelectedItem()+"',  "
-                +    "u_pass = '"+pass.getText()+"' WHERE userID = '"+idshet.getText()+"' ");
+        +    "u_email = '"+u_email.getText()+"', u_phone = '"+phone.getText()+"', u_address = '"+u_location.getText()+"',             "
+        +    "u_name = '"+u_name.getText()+"', u_role = '"+u_role.getSelectedItem()+"', u_status = '"+u_status.getSelectedItem()+"',  "
+        +    "u_pass = '"+pass.getText()+"' WHERE userID = '"+idshet.getText()+"' ");
+               
+          JOptionPane.showMessageDialog(null, "Updated Successfully.");
+          
           userlist.setVisible(true);
           this.dispose();
         }
@@ -565,13 +568,8 @@ public class useradd extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-                String fname = fn.getText(), lname = ln.getText(), username = u_name.getText(),
-                email = u_email.getText(), address = u_location.getText(),
-                conf =  pass2.getText().trim(), password = pass.getText().trim(), contact = phone.getText(),
-                role = u_status.getSelectedItem().toString();
-                
-                fn.setText(""); ln.setText(""); u_name.setText(""); u_email.setText(""); u_location.setText("");
-                pass.setText(""); pass2.setText(""); phone.setText(""); mn.setText("");
+        fn.setText(""); ln.setText(""); u_name.setText(""); u_email.setText(""); u_location.setText("");
+        pass.setText(""); pass2.setText(""); phone.setText(""); mn.setText("");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void mnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnActionPerformed

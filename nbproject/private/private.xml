@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/config/dbConnector.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/ADMIN/useradd.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/config/Session.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/AUTHEN/register.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/USER/g_dash.java</file>
-            <file>jar:file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/xternalpx/rs2xml.jar!/src/net/proteanit/sql/DbUtils.java</file>
-            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/ADMIN/a_dash.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/ADMIN/uform.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/ADMIN/a_dash.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/USER/h_dash.java</file>
             <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/AUTHEN/login.java</file>
+            <file>file:/C:/Users/user/OneDrive/Documents/NetBeansProjects/bbs2/src/ADMIN/userset.java</file>
         </group>
     </open-files>
 </project-private>

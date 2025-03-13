@@ -6,8 +6,11 @@
 package AUTHEN;
 
 import config.dbConnector;
+import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +24,12 @@ public class register extends javax.swing.JFrame {
      */
     public register() {
         initComponents();
+        
+        Icon i = logo2.getIcon();
+        ImageIcon icon = (ImageIcon)i;
+        Image image = icon.getImage().getScaledInstance(logo2.getWidth(), logo2.getHeight(), Image.SCALE_SMOOTH);
+        logo2.setIcon(new ImageIcon(image));
+        
     }
      
     public static String email, usname;
@@ -63,6 +72,7 @@ public class register extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         forgotpass = new javax.swing.JLabel();
         forgotpass1 = new javax.swing.JLabel();
@@ -88,6 +98,7 @@ public class register extends javax.swing.JFrame {
         Appname = new javax.swing.JLabel();
         forgotpass3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        logo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -95,6 +106,10 @@ public class register extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(146, 80, 80));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(255, 255, 255)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jTextField1.setBorder(null);
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(243, 234, 234));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -105,6 +120,7 @@ public class register extends javax.swing.JFrame {
         jPanel2.add(forgotpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
 
         forgotpass1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        forgotpass1.setForeground(new java.awt.Color(134, 163, 194));
         forgotpass1.setText("Get Started");
         jPanel2.add(forgotpass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
@@ -197,7 +213,7 @@ public class register extends javax.swing.JFrame {
         jPanel2.add(u_location, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 160, 30));
 
         u_role.setFont(new java.awt.Font("Trebuchet MS", 1, 11)); // NOI18N
-        u_role.setForeground(new java.awt.Color(183, 206, 229));
+        u_role.setForeground(new java.awt.Color(134, 163, 194));
         u_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Roles", "Host", "Guest", "Admin" }));
         u_role.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(183, 206, 229), 2, true));
         u_role.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +234,7 @@ public class register extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(214, 223, 231));
         jButton1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(183, 206, 229));
+        jButton1.setForeground(new java.awt.Color(134, 163, 194));
         jButton1.setText("REGISTER");
         jButton1.setBorder(null);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -239,6 +255,11 @@ public class register extends javax.swing.JFrame {
         Signuplinker2.setForeground(new java.awt.Color(146, 80, 80));
         Signuplinker2.setText("Login");
         Signuplinker2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Signuplinker2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Signuplinker2MouseClicked(evt);
+            }
+        });
         jPanel2.add(Signuplinker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 30, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 300, 340));
@@ -256,6 +277,10 @@ public class register extends javax.swing.JFrame {
 
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 320));
+
+        logo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/logowhite.png"))); // NOI18N
+        logo2.setText("   ");
+        jPanel1.add(logo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 190, 170));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -346,6 +371,12 @@ public class register extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void Signuplinker2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Signuplinker2MouseClicked
+        login in = new login();
+        in.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_Signuplinker2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -400,7 +431,9 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField ln;
+    private javax.swing.JLabel logo2;
     private javax.swing.JTextField pass;
     private javax.swing.JTextField pass2;
     private javax.swing.JTextField phone;

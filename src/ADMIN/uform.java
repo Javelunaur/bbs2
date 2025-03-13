@@ -174,7 +174,7 @@ public class uform extends javax.swing.JFrame {
                 id1MouseEntered(evt);
             }
         });
-        jPanel4.add(id1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 50, -1));
+        jPanel4.add(id1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 50, -1));
 
         id.setForeground(new java.awt.Color(255, 255, 255));
         id.setText("      ");
@@ -187,18 +187,19 @@ public class uform extends javax.swing.JFrame {
                 idMouseEntered(evt);
             }
         });
-        jPanel4.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 50, -1));
+        jPanel4.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 50, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 50));
 
         u_tbl.setBackground(new java.awt.Color(243, 234, 234));
+        u_tbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         u_tbl.setGridColor(new java.awt.Color(146, 80, 80));
         u_tbl.setSelectionBackground(new java.awt.Color(183, 206, 229));
         u_tbl.setSelectionForeground(new java.awt.Color(243, 234, 234));
         u_tbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(u_tbl);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 480, 260));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 480, 270));
 
         jPanel6.setBackground(new java.awt.Color(186, 133, 133));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
