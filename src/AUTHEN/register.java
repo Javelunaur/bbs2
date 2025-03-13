@@ -6,7 +6,9 @@
 package AUTHEN;
 
 import config.dbConnector;
+import config.hash;
 import java.awt.Image;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.Icon;
@@ -78,7 +80,6 @@ public class register extends javax.swing.JFrame {
         forgotpass1 = new javax.swing.JLabel();
         forgotpass2 = new javax.swing.JLabel();
         ln = new javax.swing.JTextField();
-        pass2 = new javax.swing.JTextField();
         forgotpass5 = new javax.swing.JLabel();
         u_name = new javax.swing.JTextField();
         phone = new javax.swing.JTextField();
@@ -91,10 +92,11 @@ public class register extends javax.swing.JFrame {
         u_location = new javax.swing.JTextField();
         u_role = new javax.swing.JComboBox<>();
         forgotpass4 = new javax.swing.JLabel();
-        pass = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         Signuplinker1 = new javax.swing.JLabel();
         Signuplinker2 = new javax.swing.JLabel();
+        pass = new javax.swing.JPasswordField();
+        pass2 = new javax.swing.JPasswordField();
         Appname = new javax.swing.JLabel();
         forgotpass3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -137,10 +139,6 @@ public class register extends javax.swing.JFrame {
             }
         });
         jPanel2.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 120, 30));
-
-        pass2.setBackground(new java.awt.Color(243, 234, 234));
-        pass2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
-        jPanel2.add(pass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 120, 30));
 
         forgotpass5.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         forgotpass5.setForeground(new java.awt.Color(102, 102, 102));
@@ -228,10 +226,6 @@ public class register extends javax.swing.JFrame {
         forgotpass4.setText("Password");
         jPanel2.add(forgotpass4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
-        pass.setBackground(new java.awt.Color(243, 234, 234));
-        pass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
-        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 120, 30));
-
         jButton1.setBackground(new java.awt.Color(214, 223, 231));
         jButton1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(134, 163, 194));
@@ -261,6 +255,14 @@ public class register extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Signuplinker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 30, -1));
+
+        pass.setBackground(new java.awt.Color(243, 234, 234));
+        pass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
+        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 120, 30));
+
+        pass2.setBackground(new java.awt.Color(243, 234, 234));
+        pass2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
+        jPanel2.add(pass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 120, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 300, 340));
 
@@ -326,7 +328,6 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_u_roleActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dbConnector dbc = new dbConnector();
         String firstName = fn.getText(), lastName = ln.getText(), username = u_name.getText(), email = u_email.getText(), address = u_location.getText(), conf =  pass2.getText().trim(), password = pass.getText().trim(), contact = phone.getText(), role = u_role.getSelectedItem().toString();
         
         if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contact.isEmpty()) {
@@ -335,10 +336,8 @@ public class register extends javax.swing.JFrame {
         }else if (password.length() < 8 || !password.equals(conf) || conf.length() < 8) {
             if(password.length()< 8 || conf.length()<8){
                 JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
-                
             }else{
                 JOptionPane.showMessageDialog(null, "Passwords do not match.");
-               
             }   
         }else if (!contact.matches("[0-9]+")) {
             JOptionPane.showMessageDialog(null, "Contact number should only contain numbers.");
@@ -349,15 +348,18 @@ public class register extends javax.swing.JFrame {
         }else if(dupCheck()){
             System.out.println("[ERROR]Duplicate Found.");
         }else{
-       if (dbc.insertData("INSERT INTO tbl_user (fname, lname, u_name, u_email, u_address, u_pass, u_role, u_phone, u_status) VALUES ('" 
-    + fn.getText() + "', '" 
-    + ln.getText() + "', '" 
-    + u_name.getText() + "', '" 
-    + u_email.getText() + "', '" 
-    + u_location.getText() + "', '" 
-    + pass2.getText() + "', '" 
-    + u_role.getSelectedItem() + "', '"
-    +phone.getText()+"', 'Pending')") > 0) { 
+          dbConnector dbc = new dbConnector();
+          try{
+          String passs = hash.hashPassword(pass.getText());
+         if (dbc.insertData("INSERT INTO tbl_user (fname, lname, u_name, u_email, u_address, u_pass, u_role, u_phone, u_status) VALUES ('" 
+      +    fn.getText() + "', '" 
+      +    ln.getText() + "', '" 
+      +    u_name.getText() + "', '" 
+      +    u_email.getText() + "', '" 
+      +    u_location.getText() + "', '" 
+      +    passs + "', '" 
+      +    u_role.getSelectedItem() + "', '"
+      +    phone.getText()+"', 'Pending')") > 0) { 
     JOptionPane.showMessageDialog(null,"Registered Successfully.");
     login log = new login();
     log.setVisible(true);
@@ -366,8 +368,10 @@ public class register extends javax.swing.JFrame {
        else {
     JOptionPane.showMessageDialog(null,"Registration Failed..");
 } 
+         } catch(NoSuchAlgorithmException ex){
+                  System.out.println(""+ex);
  }
-        
+        } 
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -434,8 +438,8 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField ln;
     private javax.swing.JLabel logo2;
-    private javax.swing.JTextField pass;
-    private javax.swing.JTextField pass2;
+    private javax.swing.JPasswordField pass;
+    private javax.swing.JPasswordField pass2;
     private javax.swing.JTextField phone;
     private javax.swing.JTextField u_email;
     private javax.swing.JTextField u_location;

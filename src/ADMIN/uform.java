@@ -22,7 +22,7 @@ public class uform extends javax.swing.JFrame {
         public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT userID, u_role, fname, lname, mname, u_name, u_email, u_status FROM tbl_user");
+            ResultSet rs = dbc.getData("SELECT userID, u_role, lname, u_name, u_email, u_status FROM tbl_user");
             u_tbl.setModel(DbUtils.resultSetToTableModel(rs));
             rs.close();
         }catch(SQLException ex){

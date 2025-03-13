@@ -5,11 +5,13 @@ import USER.g_dash;
 import USER.h_dash;
 import config.Session;
 import config.dbConnector;
+import config.hash;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -22,43 +24,47 @@ public class login extends javax.swing.JFrame {
         Icon i = logo2.getIcon();
         ImageIcon icon = (ImageIcon)i;
         Image image = icon.getImage().getScaledInstance(logo2.getWidth(), logo2.getHeight(), Image.SCALE_SMOOTH);
-        logo2.setIcon(new ImageIcon(image));
-        
+        logo2.setIcon(new ImageIcon(image));       
     }
-    
     static String status;
     static String role;
     
-       public static boolean loginAcc(String username, String email, String password){
-       
+       public static boolean loginAcc(String username, String email, String password){     
        dbConnector connector = new dbConnector();
-       
-       
        try{
-          String query = "SELECT * FROM tbl_user WHERE u_name = '" + username + "' OR u_email = '" + email + "' AND u_pass = '" + password + "' ";
+          String query = "SELECT * FROM tbl_user WHERE u_name = '" + username + "' OR u_email = '" + email + "' ";
           ResultSet resultSet = connector.getData(query);
           if (resultSet.next()){
-              status = resultSet.getString("u_status");
-              role = resultSet.getString("u_role");
-              Session ses =Session.getInstance();
-              ses.setUid(resultSet.getInt("userID"));
-              ses.setRole(resultSet.getString("u_role"));
-              ses.setFname(resultSet.getString("fname"));
-              ses.setLname(resultSet.getString("lname"));
-              ses.setMname(resultSet.getString("mname"));
-              ses.setEmail(resultSet.getString("u_email"));
-              ses.setPhone(resultSet.getString("u_phone"));
-              ses.setAddress(resultSet.getString("u_address"));
-              ses.setPassword(resultSet.getString("u_pass"));
-              ses.setUsern(resultSet.getString("u_name"));
-              ses.setStatus(resultSet.getString("u_status"));
-              System.out.println(""+ses.getUid());
+              String hashedpass = resultSet.getString("u_pass");
+              String rehashedpass = hash.hashPassword(password);
+              
+              System.out.println(""+hashedpass);
+              System.out.println(""+rehashedpass);
+              
+              if(hashedpass.equals(rehashedpass)){
+                 status = resultSet.getString("u_status");
+                 role = resultSet.getString("u_role");
+                 Session ses =Session.getInstance();
+                 ses.setUid(resultSet.getInt("userID"));
+                 ses.setRole(resultSet.getString("u_role"));
+                 ses.setFname(resultSet.getString("fname"));
+                 ses.setLname(resultSet.getString("lname"));
+                 ses.setMname(resultSet.getString("mname"));
+                 ses.setEmail(resultSet.getString("u_email"));
+                 ses.setPhone(resultSet.getString("u_phone"));
+                 ses.setAddress(resultSet.getString("u_address"));
+                 ses.setPassword(resultSet.getString("u_pass"));
+                 ses.setUsern(resultSet.getString("u_name"));
+                 ses.setStatus(resultSet.getString("u_status"));
+                 System.out.println(""+ses.getUid());
               return true;
-       }else {
+              }else{
+                return false;
+              }            
+          }else {
                return false;
             }
-       
-       }catch (SQLException ex){
+       }catch (SQLException | NoSuchAlgorithmException ex){
            return false;
        }
        }
@@ -225,6 +231,7 @@ public class login extends javax.swing.JFrame {
         if (loginAcc(user.getText(), user.getText(), pass.getText())){
              if(status.equals("Active")){
             JOptionPane.showMessageDialog(null,"Login Success! Redirecting..");
+           
               
             if(role.equals("Admin")){
                 a_dash admin = new a_dash();
