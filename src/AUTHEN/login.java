@@ -3,6 +3,7 @@ package AUTHEN;
 import ADMIN.a_dash;
 import USER.g_dash;
 import USER.h_dash;
+import config.Session;
 import config.dbConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,13 +30,29 @@ public class login extends javax.swing.JFrame {
     static String role;
     
        public static boolean loginAcc(String username, String password){
+       
        dbConnector connector = new dbConnector();
+       
+       
        try{
           String query = "SELECT * FROM tbl_user WHERE u_name = '" + username + "' AND u_pass = '" + password + "'";
           ResultSet resultSet = connector.getData(query);
           if (resultSet.next()){
               status = resultSet.getString("u_status");
               role = resultSet.getString("u_role");
+              Session ses =Session.getInstance();
+              ses.setUid(resultSet.getInt("userID"));
+              ses.setRole(resultSet.getString("u_role"));
+              ses.setFname(resultSet.getString("fname"));
+              ses.setLname(resultSet.getString("lname"));
+              ses.setMname(resultSet.getString("mname"));
+              ses.setEmail(resultSet.getString("u_email"));
+              ses.setPhone(resultSet.getString("u_phone"));
+              ses.setAddress(resultSet.getString("u_address"));
+              ses.setPassword(resultSet.getString("u_pass"));
+              ses.setUsern(resultSet.getString("u_name"));
+              ses.setStatus(resultSet.getString("u_status"));
+              System.out.println(""+ses.getUid());
               return true;
        }else {
                return false;
@@ -48,31 +65,7 @@ public class login extends javax.swing.JFrame {
        
        
        
-//           static String status;
-//    static String type;
-//    
-//   public static boolean loginAcc(String username, String password){
-//       
-//      
-//        dbConnector connector = new dbConnector();
-//        try {
-//            String query = "SELECT * FROM tbl_user WHERE user_username = '" + username + "' AND user_pass = '" + password + "'";
-//            ResultSet resultSet = connector.getData(query);
-//            if (resultSet.next()){
-//                status = resultSet.getString("user_stats");
-//                type = resultSet.getString("user_type");
-//                return true;
-//            }else {
-//                return false;
-//            }
-//            
-//            
-//            
-//        }  catch (SQLException ex) {
-//                    return false;
-//                    }
-//        }
-//    @SuppressWarnings("unchecked")
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -91,8 +84,10 @@ public class login extends javax.swing.JFrame {
         tagline2 = new javax.swing.JLabel();
         tagline1 = new javax.swing.JLabel();
         logo2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(146, 80, 80));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(255, 255, 255)));
@@ -138,6 +133,7 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(forgotpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         user.setBackground(new java.awt.Color(243, 234, 234));
+        user.setAlignmentX(0.0F);
         user.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
         user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +143,7 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 240, 30));
 
         pass.setBackground(new java.awt.Color(243, 234, 234));
+        pass.setAlignmentX(0.0F);
         pass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
         jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 240, 30));
 
@@ -156,6 +153,11 @@ public class login extends javax.swing.JFrame {
         jButton1.setText("LOGIN");
         jButton1.setBorder(null);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -195,6 +197,9 @@ public class login extends javax.swing.JFrame {
         logo2.setText("jLabel2");
         jPanel1.add(logo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 200, 210));
 
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 300, 260));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -207,6 +212,7 @@ public class login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
@@ -247,6 +253,10 @@ public class login extends javax.swing.JFrame {
        reg.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_SignuplinkerMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -292,6 +302,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel forgotpass1;
     private javax.swing.JLabel forgotpass2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logo2;

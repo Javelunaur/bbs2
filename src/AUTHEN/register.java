@@ -87,8 +87,10 @@ public class register extends javax.swing.JFrame {
         Signuplinker2 = new javax.swing.JLabel();
         Appname = new javax.swing.JLabel();
         forgotpass3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(146, 80, 80));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(255, 255, 255)));
@@ -239,24 +241,27 @@ public class register extends javax.swing.JFrame {
         Signuplinker2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.add(Signuplinker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 30, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 300, 320));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 300, 340));
 
         Appname.setBackground(new java.awt.Color(0, 0, 0));
         Appname.setFont(new java.awt.Font("Verdana", 1, 48)); // NOI18N
         Appname.setForeground(new java.awt.Color(183, 206, 229));
         Appname.setText("iBook");
-        jPanel1.add(Appname, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
+        jPanel1.add(Appname, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
 
         forgotpass3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         forgotpass3.setForeground(new java.awt.Color(255, 255, 255));
         forgotpass3.setText("Join Us");
-        jPanel1.add(forgotpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
+        jPanel1.add(forgotpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, -1, -1));
+
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 320));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,6 +269,7 @@ public class register extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnActionPerformed
@@ -391,6 +397,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel forgotpass8;
     private javax.swing.JLabel forgotpass9;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField ln;

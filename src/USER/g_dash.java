@@ -43,6 +43,7 @@ public class g_dash extends javax.swing.JFrame {
         usertable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(243, 234, 234));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,7 +57,7 @@ public class g_dash extends javax.swing.JFrame {
         Appname.setText("iBook");
         jPanel4.add(Appname, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 40));
 
         jPanel5.setBackground(new java.awt.Color(186, 133, 133));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,7 +114,7 @@ public class g_dash extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(usertable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 460, 330));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 480, 330));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,6 +128,7 @@ public class g_dash extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -193,3 +195,6 @@ public class g_dash extends javax.swing.JFrame {
     private javax.swing.JTable usertable;
     // End of variables declaration//GEN-END:variables
 }
+
+
+//Color theme = new Color(146,80,80);
