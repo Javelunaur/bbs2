@@ -1,5 +1,13 @@
-package ADMIN;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package USER;
 
+import ADMIN.a_dash;
+import ADMIN.uform;
+import ADMIN.userset;
 import AUTHEN.login;
 import config.Session;
 import config.dbConnector;
@@ -13,9 +21,16 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class passchange extends javax.swing.JFrame {
+/**
+ *
+ * @author SCC12
+ */
+public class u_pass extends javax.swing.JFrame {
 
-    public passchange() {
+    /**
+     * Creates new form u_pass
+     */
+    public u_pass() {
         initComponents();
         
         Icon a = avatar1.getIcon();
@@ -27,7 +42,9 @@ public class passchange extends javax.swing.JFrame {
         ImageIcon icon1 = (ImageIcon)b;
         Image image1 = icon1.getImage().getScaledInstance(avatar.getWidth(), avatar.getHeight(), Image.SCALE_SMOOTH);
         avatar.setIcon(new ImageIcon(image1));
+        
     }
+
     Color def = new Color(153,153,153);
     Color exit = new Color(255,255,255);
     Color hover = new Color(146,80,80);
@@ -35,7 +52,6 @@ public class passchange extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         change = new javax.swing.JButton();
         search = new javax.swing.JLabel();
@@ -64,14 +80,7 @@ public class passchange extends javax.swing.JFrame {
         avatar1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
-        jButton1.setText("jButton1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(243, 234, 234));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -323,6 +332,46 @@ public class passchange extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void changeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_changeMouseClicked
+
+    private void changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeActionPerformed
+        try{
+            dbConnector dbc = new dbConnector();
+            Session ses = Session.getInstance();
+
+            String query = "SELECT * FROM tbl_user WHERE userID = '"+ses.getUid()+"' ";
+            ResultSet rs = dbc.getData(query);
+            if(rs.next()){
+                String oldbpass = rs.getString("u_pass");
+                String oldhash = hash.hashPassword(oldpass.getText());
+
+                if(oldbpass.equals(oldhash)){
+                    String npass = hash.hashPassword(newpass.getText());
+                    dbc.updateData("UPDATE tbl_user SET u_pass = '"+npass+"' ");
+                    JOptionPane.showMessageDialog(null,"Successfully Updated Password.");
+                    System.out.println("new pass: "+npass);
+                    userset settings = new userset();
+                    settings.setVisible(true);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null,"[ERROR] Old password is Incorrect.");
+
+                    String npass = hash.hashPassword(newpass.getText());
+
+                    System.out.println(""+oldbpass);
+                    System.out.println(""+oldhash);
+                    System.out.println(""+npass);
+                }
+
+            }
+
+        }catch(SQLException | NoSuchAlgorithmException ex){
+            System.out.println(""+ex);
+        }
+    }//GEN-LAST:event_changeActionPerformed
+
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         login log = new login();
         log.setVisible(true);
@@ -390,101 +439,11 @@ public class passchange extends javax.swing.JFrame {
         list.setForeground(exit);
     }//GEN-LAST:event_listMouseExited
 
-    private void changeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_changeMouseClicked
-
-    private void changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeActionPerformed
-       try{
-        dbConnector dbc = new dbConnector();
-        Session ses = Session.getInstance();
-        
-        String query = "SELECT * FROM tbl_user WHERE userID = '"+ses.getUid()+"' ";
-        ResultSet rs = dbc.getData(query);
-        if(rs.next()){
-           String oldbpass = rs.getString("u_pass");
-           String oldhash = hash.hashPassword(oldpass.getText());
-           
-           if(oldbpass.equals(oldhash)){
-             String npass = hash.hashPassword(newpass.getText());
-             dbc.updateData("UPDATE tbl_user SET u_pass = '"+npass+"' ");
-             JOptionPane.showMessageDialog(null,"Successfully Updated Password.");
-               System.out.println("new pass: "+npass);
-               userset settings = new userset();
-               settings.setVisible(true);
-               this.dispose();
-           }else{
-               JOptionPane.showMessageDialog(null,"[ERROR] Old password is Incorrect.");
-               
-               String npass = hash.hashPassword(newpass.getText());
-               
-               System.out.println(""+oldbpass);
-               System.out.println(""+oldhash);
-               System.out.println(""+npass);
-           }
-           
-        }
-        
-       }catch(SQLException | NoSuchAlgorithmException ex){
-           System.out.println(""+ex);
-       }
-
-    }//GEN-LAST:event_changeActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-          Session ses = Session.getInstance();
-//        if(ses.getUid()==0){
-//           JOptionPane.showMessageDialog(null,"[ERROR] No account found, Login First.");
-//           login log = new login();
-//           log.setVisible(true);
-//           this.dispose();
-//        }else{
-           user.setText(""+ses.getUsern());
-           id.setText(""+ses.getUid());
-//        }
-    }//GEN-LAST:event_formWindowActivated
-
-    private void oldpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oldpassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_oldpassActionPerformed
-
-    private void confActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confActionPerformed
-
-    private void oldpassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_oldpassFocusLost
-        if(oldpass.getText().equals("")){
-            oldpass.setText(" Old Password");
-            oldpass.setForeground(def);
-        }
-    }//GEN-LAST:event_oldpassFocusLost
-
-    private void oldpassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_oldpassFocusGained
-        if (oldpass.getText().equals(" Old Password")){
-        oldpass.setText("");
-        oldpass.setForeground(Color.BLACK);
-    }
-    }//GEN-LAST:event_oldpassFocusGained
-
-    private void newpassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newpassFocusGained
-                if (newpass.getText().equals(" New Password")){
-        newpass.setText("");
-        newpass.setForeground(Color.BLACK);
-    }
-    }//GEN-LAST:event_newpassFocusGained
-
-    private void newpassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newpassFocusLost
-        if(newpass.getText().equals("")){
-            newpass.setText(" New Password");
-            newpass.setForeground(def);
-        }
-    }//GEN-LAST:event_newpassFocusLost
-
     private void confFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confFocusGained
-       if (conf.getText().equals(" Confirm New Password")){
-        conf.setText("");
-        conf.setForeground(Color.BLACK);
-    }
+        if (conf.getText().equals(" Confirm New Password")){
+            conf.setText("");
+            conf.setForeground(Color.BLACK);
+        }
     }//GEN-LAST:event_confFocusGained
 
     private void confFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confFocusLost
@@ -493,6 +452,42 @@ public class passchange extends javax.swing.JFrame {
             conf.setForeground(def);
         }
     }//GEN-LAST:event_confFocusLost
+
+    private void confActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confActionPerformed
+
+    private void oldpassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_oldpassFocusGained
+        if (oldpass.getText().equals(" Old Password")){
+            oldpass.setText("");
+            oldpass.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_oldpassFocusGained
+
+    private void oldpassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_oldpassFocusLost
+        if(oldpass.getText().equals("")){
+            oldpass.setText(" Old Password");
+            oldpass.setForeground(def);
+        }
+    }//GEN-LAST:event_oldpassFocusLost
+
+    private void oldpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oldpassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_oldpassActionPerformed
+
+    private void newpassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newpassFocusGained
+        if (newpass.getText().equals(" New Password")){
+            newpass.setText("");
+            newpass.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_newpassFocusGained
+
+    private void newpassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newpassFocusLost
+        if(newpass.getText().equals("")){
+            newpass.setText(" New Password");
+            newpass.setForeground(def);
+        }
+    }//GEN-LAST:event_newpassFocusLost
 
     /**
      * @param args the command line arguments
@@ -511,20 +506,20 @@ public class passchange extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(passchange.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(u_pass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(passchange.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(u_pass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(passchange.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(u_pass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(passchange.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(u_pass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new passchange().setVisible(true);
+                new u_pass().setVisible(true);
             }
         });
     }
@@ -542,7 +537,6 @@ public class passchange extends javax.swing.JFrame {
     private javax.swing.JLabel home;
     private javax.swing.JLabel id;
     private javax.swing.JLabel id1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

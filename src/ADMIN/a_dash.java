@@ -60,6 +60,7 @@ public class a_dash extends javax.swing.JFrame {
         Appname = new javax.swing.JLabel();
         acts = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -76,9 +77,13 @@ public class a_dash extends javax.swing.JFrame {
         search.setText("     ");
         jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 20, 20));
 
-        srch.setText("   ");
+        srch.setForeground(new java.awt.Color(153, 153, 153));
+        srch.setText(" Browse");
         srch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 80, 80)));
         srch.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                srchFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 srchFocusLost(evt);
             }
@@ -213,6 +218,7 @@ public class a_dash extends javax.swing.JFrame {
         jLabel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 80, 80)), "Pending Bookings", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.ABOVE_TOP));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 480, 90));
 
+        jLabel7.setBackground(new java.awt.Color(204, 204, 204));
         jLabel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 80, 80)), "TOTAL PROPERTIES", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.ABOVE_TOP));
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 140, 80));
 
@@ -241,6 +247,11 @@ public class a_dash extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
         jLabel3.setText("______________________________________________________________________________________________");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 470, -1));
+
+        jTextField1.setBackground(new java.awt.Color(243, 234, 234));
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jTextField1.setBorder(null);
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,7 +284,7 @@ public class a_dash extends javax.swing.JFrame {
     }//GEN-LAST:event_outMouseClicked
 
     private void srchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srchActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_srchActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -337,9 +348,18 @@ public class a_dash extends javax.swing.JFrame {
     }//GEN-LAST:event_outMouseExited
 
     private void srchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_srchFocusLost
-        srch.setForeground(def);
-        srch.setText("Browse");
+            if(srch.getText().equals(" ")){
+            srch.setText(" Browse");
+            srch.setForeground(def);
+        }
     }//GEN-LAST:event_srchFocusLost
+
+    private void srchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_srchFocusGained
+         if (srch.getText().equals(" Browse")){
+        srch.setText(" ");
+        srch.setForeground(Color.BLACK);
+    }
+    }//GEN-LAST:event_srchFocusGained
 
     /**
      * @param args the command line arguments
@@ -396,6 +416,7 @@ public class a_dash extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel list;
     private javax.swing.JLabel out;
     private javax.swing.JLabel search;
