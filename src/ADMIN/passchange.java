@@ -41,6 +41,7 @@ public class passchange extends javax.swing.JFrame {
         search = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Appname2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         user = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -107,6 +108,17 @@ public class passchange extends javax.swing.JFrame {
         Appname2.setText("iBook");
         jPanel4.add(Appname2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("BACK >>");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
+
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 40));
 
         jPanel5.setBackground(new java.awt.Color(186, 133, 133));
@@ -163,7 +175,7 @@ public class passchange extends javax.swing.JFrame {
         jPanel5.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Properties");
+        jLabel2.setText("Host Config..");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         sett.setForeground(new java.awt.Color(146, 80, 80));
@@ -212,7 +224,7 @@ public class passchange extends javax.swing.JFrame {
         jPanel5.add(list, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Bookings");
+        jLabel9.setText("Guest Config..");
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 100, 330));
@@ -301,7 +313,7 @@ public class passchange extends javax.swing.JFrame {
 
         avatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/avatar.png"))); // NOI18N
         avatar1.setText("     ");
-        jPanel1.add(avatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 110, 90));
+        jPanel1.add(avatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 110, 90));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(243, 234, 234));
@@ -321,6 +333,7 @@ public class passchange extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -344,11 +357,11 @@ public class passchange extends javax.swing.JFrame {
     }//GEN-LAST:event_homeMouseClicked
 
     private void homeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseEntered
-        list.setForeground(hover);
+        home.setForeground(hover);
     }//GEN-LAST:event_homeMouseEntered
 
     private void homeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseExited
-        list.setForeground(exit);
+        home.setForeground(exit);
     }//GEN-LAST:event_homeMouseExited
 
     private void settMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settMouseClicked
@@ -404,27 +417,34 @@ public class passchange extends javax.swing.JFrame {
         if(rs.next()){
            String oldbpass = rs.getString("u_pass");
            String oldhash = hash.hashPassword(oldpass.getText());
-           
-           if(oldbpass.equals(oldhash)){
-             String npass = hash.hashPassword(newpass.getText());
-             dbc.updateData("UPDATE tbl_user SET u_pass = '"+npass+"' ");
-             JOptionPane.showMessageDialog(null,"Successfully Updated Password.");
-               System.out.println("new pass: "+npass);
-               userset settings = new userset();
-               settings.setVisible(true);
-               this.dispose();
-           }else{
-               JOptionPane.showMessageDialog(null,"[ERROR] Old password is Incorrect.");
-               
-               String npass = hash.hashPassword(newpass.getText());
-               
-               System.out.println(""+oldbpass);
-               System.out.println(""+oldhash);
-               System.out.println(""+npass);
+  
+            if (oldpass.getText().isEmpty() || newpass.getText().isEmpty() || conf.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill in all required fields.");
+            } else if (newpass.getText().length() < 8 || conf.getText().length() < 8) {
+                  JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
+            } else if (newpass.getText().equals(oldpass.getText())) {
+                  JOptionPane.showMessageDialog(null, "You can't use your old password.");
+                   newpass.setText("");
+                   conf.setText(""); 
+            } else if (!newpass.getText().equals(conf.getText())) {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match.");
+            } else if (oldbpass.equals(oldhash)) {
+                 String npass = hash.hashPassword(newpass.getText());
+                 dbc.updateData("UPDATE tbl_user SET u_pass = '" + npass + "' ");
+                  JOptionPane.showMessageDialog(null, "Successfully Updated Password.");
+                 System.out.println("new pass: " + npass);
+                       login logout = new login();
+                       logout.setVisible(true);
+                       this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "[ERROR] Old password is Incorrect.");
+                System.out.println("" + oldbpass);
+                System.out.println("" + oldhash);
+                System.out.println("" + hash.hashPassword(newpass.getText()));
+}
+
            }
            
-        }
-        
        }catch(SQLException | NoSuchAlgorithmException ex){
            System.out.println(""+ex);
        }
@@ -494,6 +514,12 @@ public class passchange extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_confFocusLost
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        userset settings = new userset();
+        settings.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -546,6 +572,7 @@ public class passchange extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

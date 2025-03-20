@@ -73,8 +73,8 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jTextField2 = new javax.swing.JTextField();
         Signuplinker = new javax.swing.JLabel();
         forgotpass = new javax.swing.JLabel();
         forgotpass1 = new javax.swing.JLabel();
@@ -97,12 +97,14 @@ public class login extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(255, 255, 255)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
-
         jPanel2.setBackground(new java.awt.Color(243, 234, 234));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTextField2.setEditable(false);
+        jTextField2.setBackground(new java.awt.Color(243, 234, 234));
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jTextField2.setBorder(null);
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 0, 0));
 
         Signuplinker.setFont(new java.awt.Font("Times New Roman", 2, 9)); // NOI18N
         Signuplinker.setForeground(new java.awt.Color(146, 80, 80));
@@ -153,6 +155,11 @@ public class login extends javax.swing.JFrame {
         pass.setBackground(new java.awt.Color(243, 234, 234));
         pass.setAlignmentX(0.0F);
         pass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
+        pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passActionPerformed(evt);
+            }
+        });
         jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 240, 30));
 
         jButton1.setBackground(new java.awt.Color(214, 223, 231));
@@ -268,6 +275,10 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -315,7 +326,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel logo2;
     private javax.swing.JPasswordField pass;
     private javax.swing.JLabel tagline1;

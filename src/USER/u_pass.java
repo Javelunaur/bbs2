@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package USER;
 
 import ADMIN.a_dash;
@@ -11,25 +6,18 @@ import ADMIN.userset;
 import AUTHEN.login;
 import config.Session;
 import config.dbConnector;
-import config.hash;
-import java.awt.Color;
 import java.awt.Image;
-import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import config.hash;
+import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author SCC12
- */
 public class u_pass extends javax.swing.JFrame {
 
-    /**
-     * Creates new form u_pass
-     */
     public u_pass() {
         initComponents();
         
@@ -42,12 +30,12 @@ public class u_pass extends javax.swing.JFrame {
         ImageIcon icon1 = (ImageIcon)b;
         Image image1 = icon1.getImage().getScaledInstance(avatar.getWidth(), avatar.getHeight(), Image.SCALE_SMOOTH);
         avatar.setIcon(new ImageIcon(image1));
-        
     }
 
     Color def = new Color(153,153,153);
     Color exit = new Color(255,255,255);
     Color hover = new Color(146,80,80);
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,6 +69,11 @@ public class u_pass extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(243, 234, 234));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -172,7 +165,7 @@ public class u_pass extends javax.swing.JFrame {
         jPanel5.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Properties");
+        jLabel2.setText("Host Config..");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         sett.setForeground(new java.awt.Color(146, 80, 80));
@@ -221,7 +214,7 @@ public class u_pass extends javax.swing.JFrame {
         jPanel5.add(list, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Bookings");
+        jLabel9.setText("Guest Config..");
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 100, 330));
@@ -310,7 +303,7 @@ public class u_pass extends javax.swing.JFrame {
 
         avatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/avatar.png"))); // NOI18N
         avatar1.setText("     ");
-        jPanel1.add(avatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 110, 90));
+        jPanel1.add(avatar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 110, 90));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(243, 234, 234));
@@ -347,24 +340,30 @@ public class u_pass extends javax.swing.JFrame {
                 String oldbpass = rs.getString("u_pass");
                 String oldhash = hash.hashPassword(oldpass.getText());
 
-                if(oldbpass.equals(oldhash)){
+                if (oldpass.getText().isEmpty() || newpass.getText().isEmpty() || conf.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill in all required fields.");
+                } else if (newpass.getText().length() < 8 || conf.getText().length() < 8) {
+                    JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
+                } else if (newpass.getText().equals(oldpass.getText())) {
+                    JOptionPane.showMessageDialog(null, "You can't use your old password.");
+                    newpass.setText("");
+                    conf.setText("");
+                } else if (!newpass.getText().equals(conf.getText())) {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match.");
+                } else if (oldbpass.equals(oldhash)) {
                     String npass = hash.hashPassword(newpass.getText());
-                    dbc.updateData("UPDATE tbl_user SET u_pass = '"+npass+"' ");
-                    JOptionPane.showMessageDialog(null,"Successfully Updated Password.");
-                    System.out.println("new pass: "+npass);
-                    userset settings = new userset();
-                    settings.setVisible(true);
+                    dbc.updateData("UPDATE tbl_user SET u_pass = '" + npass + "' ");
+                    JOptionPane.showMessageDialog(null, "Successfully Updated Password.");
+                    System.out.println("new pass: " + npass);
+                    login logout = new login();
+                    logout.setVisible(true);
                     this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(null,"[ERROR] Old password is Incorrect.");
-
-                    String npass = hash.hashPassword(newpass.getText());
-
-                    System.out.println(""+oldbpass);
-                    System.out.println(""+oldhash);
-                    System.out.println(""+npass);
+                } else {
+                    JOptionPane.showMessageDialog(null, "[ERROR] Old password is Incorrect.");
+                    System.out.println("" + oldbpass);
+                    System.out.println("" + oldhash);
+                    System.out.println("" + hash.hashPassword(newpass.getText()));
                 }
-
             }
 
         }catch(SQLException | NoSuchAlgorithmException ex){
@@ -488,6 +487,19 @@ public class u_pass extends javax.swing.JFrame {
             newpass.setForeground(def);
         }
     }//GEN-LAST:event_newpassFocusLost
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+          Session ses = Session.getInstance();
+//        if(ses.getUid()==0){
+//           JOptionPane.showMessageDialog(null,"[ERROR] No account found, Login First.");
+//           login log = new login();
+//           log.setVisible(true);
+//           this.dispose();
+//        }else{
+           user.setText(""+ses.getUsern());
+           id.setText(""+ses.getUid());
+//        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

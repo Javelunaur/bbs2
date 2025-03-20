@@ -84,6 +84,7 @@ public class useradd extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         buttonPANE = new javax.swing.JPanel();
         add = new javax.swing.JButton();
@@ -119,6 +120,7 @@ public class useradd extends javax.swing.JFrame {
         pass = new javax.swing.JTextField();
         mn = new javax.swing.JTextField();
         u_role = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -406,6 +408,12 @@ public class useradd extends javax.swing.JFrame {
 
         jPanel2.add(addPANE, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 530, -1));
 
+        jTextField1.setEditable(false);
+        jTextField1.setBackground(new java.awt.Color(243, 234, 234));
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jTextField1.setBorder(null);
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -645,6 +653,8 @@ public class useradd extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     public javax.swing.JTextField ln;
     public javax.swing.JTextField mn;
     public javax.swing.JTextField pass;
