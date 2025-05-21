@@ -13,7 +13,7 @@ public class Session {
     private String usern;
     private String status;
     private String mname;
-    
+    private String pfp;
     
     private Session(){
         
@@ -118,6 +118,14 @@ public class Session {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public String getPfp() {
+        return pfp;
+    }
+
+    public void setPfp(String pfp) {
+        this.pfp = pfp;
     }
 
     public boolean isInstanceEmpty() {

@@ -8,8 +8,21 @@ package ADMIN;
 import AUTHEN.login;
 import config.Session;
 import config.dbConnector;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class useradd extends javax.swing.JFrame {
@@ -18,6 +31,113 @@ public class useradd extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    public String destination = "";
+    File selectedFile;
+    public String oldpath;
+    public String path;
+    
+    
+        public int FileExistenceChecker(String path){
+        File file = new File(path);
+        String fileName = file.getName();
+        
+        Path filePath = Paths.get("src/images", fileName);
+        boolean fileExists = Files.exists(filePath);
+        
+        if (fileExists) {
+            return 1;
+        } else {
+            return 0;
+        }
+    
+    }
+        
+        
+public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }        
+        
+        
+//public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+//    ImageIcon MyImage = null;
+//        if(ImagePath !=null){
+//            MyImage = new ImageIcon(ImagePath);
+//        }else{
+//            MyImage = new ImageIcon(pic);
+//        }
+//        
+//    int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+//
+//    Image img = MyImage.getImage();
+//    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+//    ImageIcon image = new ImageIcon(newImg);
+//    return image;
+//}
+
+public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+    ImageIcon MyImage = null;
+    
+    if (ImagePath != null && !ImagePath.isEmpty()) {
+        MyImage = new ImageIcon(ImagePath);
+    } else if (pic != null) {
+        MyImage = new ImageIcon(pic);
+    } else {
+        // Handle the case where both ImagePath and pic are null
+        System.out.println("No image path or byte array provided");
+        return null;
+    }
+
+    int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+    Image img = MyImage.getImage();
+    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+    ImageIcon image = new ImageIcon(newImg);
+    return image;
+}
+
+    
+    public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: "+e);
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+   }
+
+    
+    
         public static String email, usname;
         
         public boolean dupCheck(){
@@ -77,7 +197,9 @@ public class useradd extends javax.swing.JFrame {
                   return false;
               }
           }
-    
+    Color def = new Color(153,153,153);
+    Color exit = new Color(255,255,255);
+    Color hover = new Color(146,80,80);
           uform userlist = new uform();
           
     @SuppressWarnings("unchecked")
@@ -101,10 +223,8 @@ public class useradd extends javax.swing.JFrame {
         idshet = new javax.swing.JTextField();
         addPANE = new javax.swing.JPanel();
         forgotpass3 = new javax.swing.JLabel();
-        forgotpass = new javax.swing.JLabel();
         forgotpass2 = new javax.swing.JLabel();
         ln = new javax.swing.JTextField();
-        pass2 = new javax.swing.JTextField();
         forgotpass5 = new javax.swing.JLabel();
         u_name = new javax.swing.JTextField();
         phone = new javax.swing.JTextField();
@@ -120,6 +240,9 @@ public class useradd extends javax.swing.JFrame {
         pass = new javax.swing.JTextField();
         mn = new javax.swing.JTextField();
         u_role = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        view = new javax.swing.JLabel();
+        remove = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -270,17 +393,12 @@ public class useradd extends javax.swing.JFrame {
         forgotpass3.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         forgotpass3.setForeground(new java.awt.Color(102, 102, 102));
         forgotpass3.setText("Middle Name (Optional)");
-        addPANE.add(forgotpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 120, -1));
-
-        forgotpass.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        forgotpass.setForeground(new java.awt.Color(102, 102, 102));
-        forgotpass.setText("Confirm Password");
-        addPANE.add(forgotpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
+        addPANE.add(forgotpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 120, -1));
 
         forgotpass2.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         forgotpass2.setForeground(new java.awt.Color(102, 102, 102));
         forgotpass2.setText("Last Name");
-        addPANE.add(forgotpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 70, -1));
+        addPANE.add(forgotpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 70, -1));
 
         ln.setBackground(new java.awt.Color(243, 234, 234));
         ln.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
@@ -289,11 +407,7 @@ public class useradd extends javax.swing.JFrame {
                 lnActionPerformed(evt);
             }
         });
-        addPANE.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 180, 30));
-
-        pass2.setBackground(new java.awt.Color(243, 234, 234));
-        pass2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
-        addPANE.add(pass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 170, 30));
+        addPANE.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 110, 30));
 
         forgotpass5.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         forgotpass5.setForeground(new java.awt.Color(102, 102, 102));
@@ -307,7 +421,7 @@ public class useradd extends javax.swing.JFrame {
                 u_nameActionPerformed(evt);
             }
         });
-        addPANE.add(u_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 230, 30));
+        addPANE.add(u_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 150, 30));
 
         phone.setBackground(new java.awt.Color(243, 234, 234));
         phone.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
@@ -316,7 +430,7 @@ public class useradd extends javax.swing.JFrame {
                 phoneActionPerformed(evt);
             }
         });
-        addPANE.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 190, 30));
+        addPANE.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 130, 30));
 
         forgotpass6.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         forgotpass6.setForeground(new java.awt.Color(102, 102, 102));
@@ -326,7 +440,7 @@ public class useradd extends javax.swing.JFrame {
         forgotpass7.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         forgotpass7.setForeground(new java.awt.Color(102, 102, 102));
         forgotpass7.setText("Contact");
-        addPANE.add(forgotpass7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 60, -1));
+        addPANE.add(forgotpass7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 60, -1));
 
         u_email.setBackground(new java.awt.Color(243, 234, 234));
         u_email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
@@ -335,7 +449,7 @@ public class useradd extends javax.swing.JFrame {
                 u_emailActionPerformed(evt);
             }
         });
-        addPANE.add(u_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 260, 30));
+        addPANE.add(u_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 170, 30));
 
         forgotpass8.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         forgotpass8.setForeground(new java.awt.Color(102, 102, 102));
@@ -355,7 +469,7 @@ public class useradd extends javax.swing.JFrame {
                 fnActionPerformed(evt);
             }
         });
-        addPANE.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 180, 30));
+        addPANE.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 100, 30));
 
         u_location.setBackground(new java.awt.Color(243, 234, 234));
         u_location.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
@@ -364,7 +478,7 @@ public class useradd extends javax.swing.JFrame {
                 u_locationActionPerformed(evt);
             }
         });
-        addPANE.add(u_location, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 510, 30));
+        addPANE.add(u_location, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 320, 30));
 
         u_status.setFont(new java.awt.Font("Trebuchet MS", 1, 11)); // NOI18N
         u_status.setForeground(new java.awt.Color(134, 163, 194));
@@ -375,16 +489,22 @@ public class useradd extends javax.swing.JFrame {
                 u_statusActionPerformed(evt);
             }
         });
-        addPANE.add(u_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 110, 30));
+        addPANE.add(u_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 110, 30));
 
         forgotpass4.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         forgotpass4.setForeground(new java.awt.Color(102, 102, 102));
         forgotpass4.setText("Password");
-        addPANE.add(forgotpass4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
+        addPANE.add(forgotpass4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
 
         pass.setBackground(new java.awt.Color(243, 234, 234));
         pass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
-        addPANE.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 170, 30));
+        pass.setEnabled(false);
+        pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passActionPerformed(evt);
+            }
+        });
+        addPANE.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 150, 30));
 
         mn.setBackground(new java.awt.Color(243, 234, 234));
         mn.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(146, 80, 80)));
@@ -393,7 +513,7 @@ public class useradd extends javax.swing.JFrame {
                 mnActionPerformed(evt);
             }
         });
-        addPANE.add(mn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 120, 30));
+        addPANE.add(mn, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 90, 30));
 
         u_role.setFont(new java.awt.Font("Trebuchet MS", 1, 11)); // NOI18N
         u_role.setForeground(new java.awt.Color(134, 163, 194));
@@ -404,9 +524,72 @@ public class useradd extends javax.swing.JFrame {
                 u_roleActionPerformed(evt);
             }
         });
-        addPANE.add(u_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 110, 30));
+        addPANE.add(u_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 110, 30));
 
-        jPanel2.add(addPANE, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 530, -1));
+        jPanel3.setBackground(new java.awt.Color(248, 243, 243));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 80, 80), 2));
+
+        view.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        view.setForeground(new java.awt.Color(102, 102, 102));
+        view.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        view.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                viewFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                viewFocusLost(evt);
+            }
+        });
+        view.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                viewMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                viewMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(view, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(view, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
+        );
+
+        addPANE.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 190, 190));
+
+        remove.setBackground(new java.awt.Color(214, 223, 231));
+        remove.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
+        remove.setForeground(new java.awt.Color(134, 163, 194));
+        remove.setText("REMOVE IMAGE");
+        remove.setBorder(null);
+        remove.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        remove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeMouseClicked(evt);
+            }
+        });
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
+        addPANE.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 110, 30));
+
+        jPanel2.add(addPANE, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 540, 280));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(243, 234, 234));
@@ -437,47 +620,51 @@ public class useradd extends javax.swing.JFrame {
         dbConnector dbc = new dbConnector();
         String fname = fn.getText(), lname = ln.getText(), username = u_name.getText(),
                 email = u_email.getText(), address = u_location.getText(),
-                conf =  pass2.getText().trim(), password = pass.getText().trim(), contact = phone.getText(),
+                /*conf =  pass2.getText().trim(),*/ password = pass.getText().trim(), contact = phone.getText(),
                 role = u_role.getSelectedItem().toString(), status = u_status.getSelectedItem().toString();
         
         if (fname.isEmpty() || lname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contact.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all required fields.");
             return;
-        }else if (password.length() < 8 || !password.equals(conf) || conf.length() < 8) {
-            if(password.length()< 8 || conf.length()<8){
-                JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");           
-            }else{
-                JOptionPane.showMessageDialog(null, "Passwords do not match.");     
-            }   
+        }else if (password.length() < 8 ) {
+                JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");               
         }else if (!contact.matches("[0-9]+")) {
-            JOptionPane.showMessageDialog(null, "Contact number should only contain numbers.");
-            
+            JOptionPane.showMessageDialog(null, "Contact number should only contain numbers.");         
         }else if (role == null || role.equals("Roles")) {
-            JOptionPane.showMessageDialog(null, "Please select a valid role (Host, Admin, or Guest).");
-            
+            JOptionPane.showMessageDialog(null, "Please select a valid role (Host, Admin, or Guest).");      
         }else if (status == null || status.equals("Status")) {
             JOptionPane.showMessageDialog(null, "Please select a valid Status (Active or Pending).");
-            
         }else if(dupCheck()){
             System.out.println("[ERROR]Duplicate Found.");
         }else{
-       if (dbc.insertData("INSERT INTO tbl_user (fname, lname, mname, u_name, u_email, u_address, u_pass, u_role, u_phone, u_status) VALUES ('" 
+            
+       
+       if (dbc.insertData("INSERT INTO tbl_user (fname, lname, mname, u_name, u_email, u_address, u_pass, u_role, u_phone, u_status, pfp) VALUES ('" 
     + fn.getText() + "', '" 
-    + ln.getText() + "', '" 
-    + u_name.getText() + "', '"
+    + ln.getText() + "', '"
     + mn.getText() + "', '"
+    + u_name.getText() + "', '"
     + u_email.getText() + "', '" 
-    + u_location.getText() + "', '" 
-    + pass2.getText() + "', '" 
+    + u_location.getText() + "', '"
+    + pass.getText() + "', '"
     + u_role.getSelectedItem() + "', '"
     +phone.getText()+"', '" 
-    +u_status.getSelectedItem() + "')") > 0) { 
+    +u_status.getSelectedItem() + "', '"
+    +destination+
+     "')") > 0) { 
+           
+           try{
+           Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+           
     JOptionPane.showMessageDialog(null,"Registered Successfully.");
     uform users = new uform();
     users.setVisible(true);
     this.dispose();
-} 
-       else {
+      
+       }catch(IOException ex){
+               System.out.println("Insert Image Error: "+ex);
+               }
+       }else {
     JOptionPane.showMessageDialog(null,"Registration Failed..");
 } 
  }
@@ -543,18 +730,13 @@ public class useradd extends javax.swing.JFrame {
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
        String fname = fn.getText(), lname = ln.getText(), username = u_name.getText(),
                 email = u_email.getText(), address = u_location.getText(),
-                conf =  pass2.getText().trim(), password = pass.getText().trim(), contact = phone.getText(),
+                password = pass.getText().trim(), contact = phone.getText(),
                 role = u_role.getSelectedItem().toString(), status = u_status.getSelectedItem().toString();
         
         if (fname.isEmpty() || lname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contact.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all required fields.");
-            return;
-        }else if (password.length() < 8 || !password.equals(conf) || conf.length() < 8) {
-            if(password.length()< 8 || conf.length()<8){
+        }else if (password.length() < 8 ) {
                 JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");           
-            }else{
-                JOptionPane.showMessageDialog(null, "Passwords do not match.");     
-            }
         }else if(updCheck()){
             System.out.println("[ERROR]Duplicate Found.");
         }else{    
@@ -562,8 +744,19 @@ public class useradd extends javax.swing.JFrame {
           dbc.updateData("UPDATE tbl_user SET fname = '"+fn.getText()+"', lname = '"+ln.getText()+"', mname = '"+mn.getText()+"',               "
         +    "u_email = '"+u_email.getText()+"', u_phone = '"+phone.getText()+"', u_address = '"+u_location.getText()+"',             "
         +    "u_name = '"+u_name.getText()+"', u_role = '"+u_role.getSelectedItem()+"', u_status = '"+u_status.getSelectedItem()+"',  "
-        +    "u_pass = '"+pass.getText()+"' WHERE userID = '"+idshet.getText()+"' ");
+        +    "u_pass = '"+pass.getText()+"', pfp = '"+destination+"' WHERE userID = '"+idshet.getText()+"' ");
                
+          if(destination.isEmpty()){
+              File existingFile = new File(oldpath);
+              if(existingFile.exists()){
+                  existingFile.delete();
+              }
+          }else{
+              if(!(oldpath.equals(path))){
+                 imageUpdater(oldpath, path);
+              }
+          }
+          
           JOptionPane.showMessageDialog(null, "Updated Successfully.");
           
           userlist.setVisible(true);
@@ -577,7 +770,7 @@ public class useradd extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         fn.setText(""); ln.setText(""); u_name.setText(""); u_email.setText(""); u_location.setText("");
-        pass.setText(""); pass2.setText(""); phone.setText(""); mn.setText("");
+        pass.setText(""); phone.setText(""); mn.setText("");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void mnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnActionPerformed
@@ -591,6 +784,63 @@ public class useradd extends javax.swing.JFrame {
     private void buttonPANEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPANEMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonPANEMouseClicked
+
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passActionPerformed
+
+    private void viewFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewFocusGained
+
+    }//GEN-LAST:event_viewFocusGained
+
+    private void viewFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_viewFocusLost
+
+    }//GEN-LAST:event_viewFocusLost
+
+    private void viewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/images/" + selectedFile.getName();
+                path  = selectedFile.getAbsolutePath();
+
+                if(FileExistenceChecker(path) == 1){
+                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path="";
+                }else{
+                    view.setIcon(ResizeImage(path, null, view));
+                    remove.setEnabled(true);
+                }
+            } catch (Exception ex) {
+                System.out.println("File Error!");
+            }
+        }
+    }//GEN-LAST:event_viewMouseClicked
+
+    private void viewMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewMouseEntered
+        Color vieww = new Color(204,204,204);
+        view.setForeground(vieww);
+    }//GEN-LAST:event_viewMouseEntered
+
+    private void viewMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewMouseExited
+        Color viewww = new Color(102,102,102);
+        view.setForeground(viewww);
+    }//GEN-LAST:event_viewMouseExited
+
+    private void removeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeMouseClicked
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        remove.setEnabled(false);
+        view.setEnabled(true);
+        view.setIcon(null);
+        destination = "";
+        path = "";
+    }//GEN-LAST:event_removeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -638,7 +888,6 @@ public class useradd extends javax.swing.JFrame {
     private javax.swing.JLabel aid;
     private javax.swing.JPanel buttonPANE;
     public javax.swing.JTextField fn;
-    private javax.swing.JLabel forgotpass;
     private javax.swing.JLabel forgotpass2;
     private javax.swing.JLabel forgotpass3;
     private javax.swing.JLabel forgotpass4;
@@ -653,18 +902,20 @@ public class useradd extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     public javax.swing.JTextField ln;
     public javax.swing.JTextField mn;
     public javax.swing.JTextField pass;
-    public javax.swing.JTextField pass2;
     public javax.swing.JTextField phone;
+    public javax.swing.JButton remove;
     public javax.swing.JTextField u_email;
     public javax.swing.JTextField u_location;
     public javax.swing.JTextField u_name;
     public javax.swing.JComboBox<String> u_role;
     public javax.swing.JComboBox<String> u_status;
     public javax.swing.JButton upd;
+    public javax.swing.JLabel view;
     // End of variables declaration//GEN-END:variables
 }

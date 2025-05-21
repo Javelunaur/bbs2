@@ -5,6 +5,7 @@ import config.dbConnector;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
@@ -324,6 +325,7 @@ public class uform extends javax.swing.JFrame {
       useradd add = new useradd();
       add.setVisible(true);
       add.upd.setEnabled(false);
+      add.remove.setEnabled(false);
       this.dispose();
     }//GEN-LAST:event_addActionPerformed
 
@@ -357,11 +359,35 @@ public class uform extends javax.swing.JFrame {
              user.u_location.setText(""+rs.getString("u_address"));
              user.u_name.setText(""+rs.getString("u_name"));
              user.pass.setText(""+rs.getString("u_pass"));
-             user.pass2.setText(""+rs.getString("u_pass"));
              user.phone.setText(""+rs.getString("u_phone"));
              user.u_role.setSelectedItem(""+rs.getString("u_role"));
              user.u_status.setSelectedItem(""+rs.getString("u_status"));
              user.idshet.setText(""+rs.getInt("userID"));
+             
+             user.view.setIcon(user.ResizeImage(rs.getString("pfp"), null, user.view));
+             user.oldpath = rs.getString("pfp");
+             user.path = rs.getString("pfp");
+             user.destination = rs.getString("pfp");
+             
+             
+//             if(rs.getString("pfp").isEmpty()){
+//                user.view.setEnabled(true);
+//                user.remove.setEnabled(false);
+//             }else{
+//                user.view.setEnabled(false);
+//                user.remove.setEnabled(true);
+//             }
+
+String pfp = rs.getString("pfp");
+if (pfp == null || pfp.isEmpty()) {
+    user.view.setEnabled(true);
+    user.remove.setEnabled(false);
+} else {
+    user.view.setEnabled(false);
+    user.remove.setEnabled(true);
+}
+
+             
              user.add.setEnabled(false);
              user.setVisible(true);
              this.dispose();
