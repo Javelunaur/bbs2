@@ -581,21 +581,15 @@ public class HostDetails extends javax.swing.JFrame {
 
     private void detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsActionPerformed
      if (currentHostId != null && !currentHostId.trim().isEmpty()) {
-            // Create the tableprop instance, PASSING THE STORED ID from HostDetails
-            tableprop tblp = new tableprop(this.currentHostId); // <--- Pass the ID from HostDetails
+            tableprop tblp = new tableprop(this.currentHostId); 
             tblp.setVisible(true);
-            this.dispose(); // Close HostDetails if you want tableprop to replace it
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Host ID is missing. Cannot view properties.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     String idOfChosenHost = idshi.getText();
-
-    // CRUCIAL: Pass the ID to the tableprop constructor!
-    tableprop pr = new tableprop(idOfChosenHost); // <-- THIS IS THE REQUIRED CHANGE
-
-    // The line below (if you had it) is now redundant because the constructor handles setting 'idd'
-    // pr.idd.setText(idOfChosenHost);
-
+    tableprop pr = new tableprop(idOfChosenHost); 
+    
     pr.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_detailsActionPerformed

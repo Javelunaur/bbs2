@@ -27,7 +27,6 @@ public class HostConfig extends javax.swing.JFrame {
         public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
-            Session ses = Session.getInstance();
             String current = "Host";
             ResultSet rs = dbc.getData("SELECT userID, lname, u_name, u_email, u_status FROM tbl_user WHERE u_role = '"+ current +"' ");
             u_tbl.setModel(DbUtils.resultSetToTableModel(rs));
@@ -367,7 +366,7 @@ public class HostConfig extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    //ohyeah
     }//GEN-LAST:event_detailsActionPerformed
 
     private void id1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_id1MouseClicked

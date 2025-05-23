@@ -46,11 +46,11 @@ public class a_dash extends javax.swing.JFrame {
         id = new javax.swing.JLabel();
         home = new javax.swing.JLabel();
         avatar = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        host = new javax.swing.JLabel();
         sett = new javax.swing.JLabel();
         id1 = new javax.swing.JLabel();
         list = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        guest = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -154,9 +154,20 @@ public class a_dash extends javax.swing.JFrame {
         avatar.setText("     ");
         jPanel5.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Properties");
-        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        host.setForeground(new java.awt.Color(255, 255, 255));
+        host.setText("Host Config");
+        host.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hostMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                hostMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                hostMouseExited(evt);
+            }
+        });
+        jPanel5.add(host, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         sett.setForeground(new java.awt.Color(255, 255, 255));
         sett.setText("User Settings");
@@ -203,9 +214,17 @@ public class a_dash extends javax.swing.JFrame {
         });
         jPanel5.add(list, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Bookings");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        guest.setForeground(new java.awt.Color(255, 255, 255));
+        guest.setText("Guest Config");
+        guest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                guestMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                guestMouseExited(evt);
+            }
+        });
+        jPanel5.add(guest, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 100, 330));
 
@@ -361,6 +380,28 @@ public class a_dash extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_srchFocusGained
 
+    private void hostMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hostMouseEntered
+        host.setForeground(hover);
+    }//GEN-LAST:event_hostMouseEntered
+
+    private void hostMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hostMouseExited
+        host.setForeground(exit);
+    }//GEN-LAST:event_hostMouseExited
+
+    private void guestMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guestMouseEntered
+        guest.setForeground(hover);
+    }//GEN-LAST:event_guestMouseEntered
+
+    private void guestMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guestMouseExited
+        guest.setForeground(exit);
+    }//GEN-LAST:event_guestMouseExited
+
+    private void hostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hostMouseClicked
+        HostConfig host = new HostConfig();
+        host.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_hostMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -402,17 +443,17 @@ public class a_dash extends javax.swing.JFrame {
     private javax.swing.JLabel Appname2;
     public javax.swing.JLabel acts;
     private javax.swing.JLabel avatar;
+    private javax.swing.JLabel guest;
     private javax.swing.JLabel home;
+    private javax.swing.JLabel host;
     private javax.swing.JLabel id;
     private javax.swing.JLabel id1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

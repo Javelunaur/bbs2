@@ -327,6 +327,7 @@ public class uform extends javax.swing.JFrame {
       add.setVisible(true);
       add.upd.setEnabled(false);
       add.remove.setEnabled(false);
+      add.pass.setEnabled(true);
       this.dispose();
     }//GEN-LAST:event_addActionPerformed
 

@@ -5,8 +5,20 @@
  */
 package ADMIN;
 
+import static ADMIN.useradd.getHeightFromWidth;
 import config.dbConnector;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +33,93 @@ public class addproperty extends javax.swing.JFrame {
     public addproperty() {
         initComponents();
     }
+    
+        public String destination = "";
+    File selectedFile;
+    public String oldpath;
+    public String path;
+    
+    
+        public int FileExistenceChecker(String path){
+        File file = new File(path);
+        String fileName = file.getName();
+        
+        Path filePath = Paths.get("src/images", fileName);
+        boolean fileExists = Files.exists(filePath);
+        
+        if (fileExists) {
+            return 1;
+        } else {
+            return 0;
+        }
+    
+    }
+        
+        
+public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }
+
+public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+    ImageIcon MyImage = null;
+    
+    if (ImagePath != null && !ImagePath.isEmpty()) {
+        MyImage = new ImageIcon(ImagePath);
+    } else if (pic != null) {
+        MyImage = new ImageIcon(pic);
+    } else {
+        // Handle the case where both ImagePath and pic are null
+        System.out.println("No image path or byte array provided");
+        return null;
+    }
+
+    int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+    Image img = MyImage.getImage();
+    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+    ImageIcon image = new ImageIcon(newImg);
+    return image;
+}
+
+    
+    public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: "+e);
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,8 +235,8 @@ public class addproperty extends javax.swing.JFrame {
         Appname1.setBackground(new java.awt.Color(0, 0, 0));
         Appname1.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
         Appname1.setForeground(new java.awt.Color(183, 206, 229));
-        Appname1.setText("USER FORM");
-        headerPANE.add(Appname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, 30));
+        Appname1.setText("PROPERTY FORM");
+        headerPANE.add(Appname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, -1, 30));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -358,11 +457,11 @@ public class addproperty extends javax.swing.JFrame {
         }else{
 
             if (dbc.insertData("INSERT INTO tbl_prop (propname, lname, mname, u_name, u_email, u_address, u_pass, u_role, u_phone, u_status, pfp) VALUES ('"
-                +php.getText() + "', '"
-                +pname.getText() + "', '"
-                +ptype.getText() + "', '"
-                +location.getText() + "', '"
-                +descr.getText() + "', '"
+                +price.getText() + "', '"
+                +pn.getText() + "', '"
+                +pt.getText() + "', '"
+                +loc.getText() + "', '"
+                +desc.getText() + "', '"
                 +rate.getSelectedItem() + "', '"
                 +destination+
                 "')") > 0) {
@@ -389,23 +488,22 @@ public class addproperty extends javax.swing.JFrame {
     }//GEN-LAST:event_updMouseClicked
 
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
-        String fname = price.getText(), lname = ln.getText(), username = u_name.getText(),
-        email = u_email.getText(), address = loc.getText(),
-        password = pass.getText().trim(), contact = phone.getText(),
-        role = u_role.getSelectedItem().toString(), status = rate.getSelectedItem().toString();
+        dbConnector dbc = new dbConnector();
+        String php = price.getText(), pname = pn.getText(), ptype = pt.getText(),
+        location = loc.getText(), descr = desc.getText(),
+        ratee = rate.getSelectedItem().toString(), status = "Available";
 
-        if (fname.isEmpty() || lname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contact.isEmpty()) {
+        if (php.isEmpty() || pname.isEmpty() || ptype.isEmpty() || location.isEmpty() || descr.isEmpty() || ratee.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all required fields.");
-        }else if (password.length() < 8 ) {
-            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters.");
-        }else if(updCheck()){
-            System.out.println("[ERROR]Duplicate Found.");
+            return;
+        }else if (rate == null) {
+            JOptionPane.showMessageDialog(null, "Please select a rate.");
         }else{
-            dbConnector dbc = new dbConnector();
-            dbc.updateData("UPDATE tbl_user SET fname = '"+price.getText()+"', lname = '"+ln.getText()+"', mname = '"+pt.getText()+"',               "
-                +    "u_email = '"+u_email.getText()+"', u_phone = '"+phone.getText()+"', u_address = '"+loc.getText()+"',             "
-                +    "u_name = '"+u_name.getText()+"', u_role = '"+u_role.getSelectedItem()+"', u_status = '"+rate.getSelectedItem()+"',  "
-                +    "u_pass = '"+pass.getText()+"', pfp = '"+destination+"' WHERE userID = '"+idshet.getText()+"' ");
+            dbc.updateData("UPDATE tbl_prop SET price = '"+price.getText()+"', pname = '"+pn.getText()+"', ptype = '"+pt.getText()+"',    "
+                +    "loc = '"+loc.getText()+"',                "
+                +    "rate = '"+rate.getSelectedItem()+"', status = '"+status+"',  "
+//                +    " pfp = '"+destination+"' "
+                +    "WHERE userID = '"+idshet.getText()+"' ");
 
             if(destination.isEmpty()){
                 File existingFile = new File(oldpath);
