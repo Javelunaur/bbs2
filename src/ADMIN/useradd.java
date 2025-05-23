@@ -157,32 +157,31 @@ public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
                        if(usname.equals(u_name.getText())){
                            JOptionPane.showMessageDialog(null, "Username already used");
                            u_name.setText("");
-                       }     
+                      }     
                        
      
-                       return true;
+                      return true;
                    }else {
                        return false;
-                   }
-              }catch (SQLException ex){
-                  System.out.println(""+ex);
+                  }
+              }catch (SQLException ex){                  System.out.println(""+ex);
                   return false;
               }
           }
         
-          public boolean updCheck(){
+         public boolean updCheck(){
               dbConnector dbc = new dbConnector();
               try{
                 String query = "SELECT * FROM tbl_user WHERE (u_name = '" + u_name.getText() + "' OR u_email = '" + u_email.getText() + "') AND userID != '"+idshet.getText()+"'";
                 ResultSet resultSet = dbc.getData(query);
            
                    if (resultSet.next()){                      
-                       email = resultSet.getString("u_email");                   
+                      email = resultSet.getString("u_email");                   
                        if(email.equals(u_email.getText())){
-                           JOptionPane.showMessageDialog(null, "Email already used.");
+                          JOptionPane.showMessageDialog(null, "Email already used.");
                            u_email.setText("");
                        }
-                       
+                     
                        usname =resultSet.getString("u_name");
                        if(usname.equals(u_name.getText())){
                            JOptionPane.showMessageDialog(null, "Username already used");
@@ -191,7 +190,7 @@ public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
                        return true;
                    }else {
                        return false;
-                   }
+                  }
               }catch (SQLException ex){
                   System.out.println(""+ex);
                   return false;
@@ -556,17 +555,11 @@ public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(view, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(view, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(view, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+            .addComponent(view, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
         );
 
         addPANE.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 190, 190));

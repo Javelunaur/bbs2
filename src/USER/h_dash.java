@@ -62,7 +62,6 @@ public class h_dash extends javax.swing.JFrame {
         props = new javax.swing.JLabel();
         sett = new javax.swing.JLabel();
         id1 = new javax.swing.JLabel();
-        res = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Appname1 = new javax.swing.JLabel();
         Appname = new javax.swing.JLabel();
@@ -167,6 +166,9 @@ public class h_dash extends javax.swing.JFrame {
         props.setForeground(new java.awt.Color(255, 255, 255));
         props.setText("My Properties");
         props.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                propsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 propsMouseEntered(evt);
             }
@@ -191,7 +193,7 @@ public class h_dash extends javax.swing.JFrame {
                 settMouseExited(evt);
             }
         });
-        jPanel5.add(sett, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        jPanel5.add(sett, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         id1.setForeground(new java.awt.Color(255, 255, 255));
         id1.setText("ID:");
@@ -205,18 +207,6 @@ public class h_dash extends javax.swing.JFrame {
             }
         });
         jPanel5.add(id1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 20, -1));
-
-        res.setForeground(new java.awt.Color(255, 255, 255));
-        res.setText("Reservations");
-        res.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                resMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                resMouseExited(evt);
-            }
-        });
-        jPanel5.add(res, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 100, 330));
 
@@ -289,7 +279,7 @@ public class h_dash extends javax.swing.JFrame {
     }//GEN-LAST:event_idMouseEntered
 
     private void settMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settMouseClicked
-        userset settings = new userset();
+b        userset settings = new userset();
         settings.setVisible(true);
         settings.acts.setText("> Home > Settings");
         this.dispose();
@@ -346,13 +336,11 @@ public class h_dash extends javax.swing.JFrame {
         props.setForeground(exit);
     }//GEN-LAST:event_propsMouseExited
 
-    private void resMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resMouseEntered
-        res.setForeground(hover);
-    }//GEN-LAST:event_resMouseEntered
-
-    private void resMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resMouseExited
-        res.setForeground(exit);
-    }//GEN-LAST:event_resMouseExited
+    private void propsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propsMouseClicked
+        h_createprop myprop = new h_createprop();
+        myprop.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_propsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -406,7 +394,6 @@ public class h_dash extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel out;
     private javax.swing.JLabel props;
-    private javax.swing.JLabel res;
     private javax.swing.JLabel search;
     public javax.swing.JLabel sett;
     private javax.swing.JTextField srch;

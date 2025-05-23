@@ -5,6 +5,8 @@
  */
 package ADMIN;
 
+import java.awt.Color;
+
 /**
  *
  * @author Admin
@@ -17,6 +19,11 @@ public class userset3 extends javax.swing.JFrame {
     public userset3() {
         initComponents();
     }
+    
+    Color def = new Color(153,153,153);
+    Color exit = new Color(255,255,255);
+    Color hover = new Color(146,80,80);
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,7 +35,6 @@ public class userset3 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
         header = new javax.swing.JPanel();
         Appname2 = new javax.swing.JLabel();
         navi = new javax.swing.JPanel();
@@ -46,8 +52,6 @@ public class userset3 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Appname3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel10 = new RoundedPanel (100);
-        jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         Appname = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -59,12 +63,6 @@ public class userset3 extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(243, 234, 234));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(243, 234, 234));
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 196, -1, -1));
 
         header.setBackground(new java.awt.Color(146, 80, 80));
         header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -136,7 +134,7 @@ public class userset3 extends javax.swing.JFrame {
         navi.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Properties");
+        jLabel2.setText("Host Config");
         navi.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         sett.setForeground(new java.awt.Color(146, 80, 80));
@@ -185,7 +183,7 @@ public class userset3 extends javax.swing.JFrame {
         navi.add(list, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Bookings");
+        jLabel9.setText("Guest Config");
         navi.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jPanel1.add(navi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 100, 330));
@@ -208,23 +206,6 @@ public class userset3 extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(249, 246, 246));
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(229, 223, 223)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel10.setBackground(new java.awt.Color(249, 246, 246));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 70, 70));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
-
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 310, 260));
 
         jPanel3.setBackground(new java.awt.Color(230, 221, 221));
@@ -246,10 +227,10 @@ public class userset3 extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Appname, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 140, 40));
@@ -279,7 +260,7 @@ public class userset3 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 259, 140, -1));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 140, -1));
 
         jPanel11.setBackground(new java.awt.Color(248, 243, 243));
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(146, 80, 80), 2));
@@ -413,36 +394,15 @@ public class userset3 extends javax.swing.JFrame {
     }//GEN-LAST:event_view1FocusLost
 
     private void view1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_view1MouseClicked
-        JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            try {
-                selectedFile = fileChooser.getSelectedFile();
-                destination = "src/images/" + selectedFile.getName();
-                path  = selectedFile.getAbsolutePath();
 
-                if(FileExistenceChecker(path) == 1){
-                    JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
-                    destination = "";
-                    path="";
-                }else{
-                    view.setIcon(ResizeImage(path, null, view));
-                    remove.setEnabled(true);
-                }
-            } catch (Exception ex) {
-                System.out.println("File Error!");
-            }
-        }
     }//GEN-LAST:event_view1MouseClicked
 
     private void view1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_view1MouseEntered
-        Color vieww = new Color(204,204,204);
-        view.setForeground(vieww);
+
     }//GEN-LAST:event_view1MouseEntered
 
     private void view1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_view1MouseExited
-        Color viewww = new Color(102,102,102);
-        view.setForeground(viewww);
+
     }//GEN-LAST:event_view1MouseExited
 
     /**
@@ -496,13 +456,10 @@ public class userset3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel list;
     private javax.swing.JPanel navi;
     private javax.swing.JLabel sett;

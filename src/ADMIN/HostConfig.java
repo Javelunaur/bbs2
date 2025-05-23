@@ -1,5 +1,8 @@
 package ADMIN;
 
+import ADMIN.HostDetails;
+import ADMIN.a_dash;
+import ADMIN.userset;
 import config.Session;
 import config.dbConnector;
 import java.awt.Color;
@@ -10,21 +13,23 @@ import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
-public class uform extends javax.swing.JFrame {
+public class HostConfig extends javax.swing.JFrame {
 
-
-    public uform() {
+    /**
+     * Creates new form HostConfig
+     */
+    public HostConfig() {
         initComponents();
+        
         displayData();
-           
     }
     
-          public void displayData(){
+        public void displayData(){
         try{
             dbConnector dbc = new dbConnector();
             Session ses = Session.getInstance();
-            int current = ses.getUid();
-            ResultSet rs = dbc.getData("SELECT userID, u_role, lname, u_name, u_email, u_status FROM tbl_user WHERE userID != '"+ current +"' ");
+            String current = "Host";
+            ResultSet rs = dbc.getData("SELECT userID, lname, u_name, u_email, u_status FROM tbl_user WHERE u_role = '"+ current +"' ");
             u_tbl.setModel(DbUtils.resultSetToTableModel(rs));
             rs.close();
         }catch(SQLException ex){
@@ -33,27 +38,23 @@ public class uform extends javax.swing.JFrame {
         }
 
     }
-
-
         
     Color exit = new Color(255,255,255);
     Color hover = new Color(146,80,80);
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel6 = new javax.swing.JLabel();
+        id = new javax.swing.JLabel();
+        id1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        add = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        edit = new javax.swing.JButton();
+        details = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         Appname1 = new javax.swing.JLabel();
         Appname2 = new javax.swing.JLabel();
-        id1 = new javax.swing.JLabel();
-        id = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         u_tbl = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
@@ -70,103 +71,15 @@ public class uform extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         acts = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
-
-        jPanel2.setBackground(new java.awt.Color(243, 234, 234));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel5.setBackground(new java.awt.Color(146, 80, 80));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        add.setBackground(new java.awt.Color(214, 223, 231));
-        add.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
-        add.setForeground(new java.awt.Color(183, 206, 229));
-        add.setText("ADD USER");
-        add.setBorder(null);
-        add.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        add.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("BACK >>");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addMouseClicked(evt);
+                jLabel6MouseClicked(evt);
             }
         });
-        add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
-            }
-        });
-        jPanel5.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 160, 30));
-
-        jButton2.setBackground(new java.awt.Color(214, 223, 231));
-        jButton2.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(183, 206, 229));
-        jButton2.setText("DELETE USER");
-        jButton2.setBorder(null);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 160, 30));
-
-        edit.setBackground(new java.awt.Color(214, 223, 231));
-        edit.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
-        edit.setForeground(new java.awt.Color(183, 206, 229));
-        edit.setText("EDIT USER");
-        edit.setBorder(null);
-        edit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        edit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                editMouseClicked(evt);
-            }
-        });
-        edit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editActionPerformed(evt);
-            }
-        });
-        jPanel5.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 160, 30));
-
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 580, 50));
-
-        jPanel4.setBackground(new java.awt.Color(146, 80, 80));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Appname1.setBackground(new java.awt.Color(0, 0, 0));
-        Appname1.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
-        Appname1.setForeground(new java.awt.Color(183, 206, 229));
-        Appname1.setText("USER LIST");
-        jPanel4.add(Appname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, 30));
-
-        Appname2.setBackground(new java.awt.Color(0, 0, 0));
-        Appname2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        Appname2.setForeground(new java.awt.Color(183, 206, 229));
-        Appname2.setText("iBook");
-        jPanel4.add(Appname2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        id1.setForeground(new java.awt.Color(255, 255, 255));
-        id1.setText("ADMIN ");
-        id1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        id1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                id1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                id1MouseEntered(evt);
-            }
-        });
-        jPanel4.add(id1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 40, -1));
 
         id.setForeground(new java.awt.Color(255, 255, 255));
         id.setText("      ");
@@ -180,7 +93,61 @@ public class uform extends javax.swing.JFrame {
                 idMouseEntered(evt);
             }
         });
-        jPanel4.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 20, -1));
+
+        id1.setForeground(new java.awt.Color(255, 255, 255));
+        id1.setText("ADMIN ");
+        id1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        id1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                id1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                id1MouseEntered(evt);
+            }
+        });
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel2.setBackground(new java.awt.Color(243, 234, 234));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setBackground(new java.awt.Color(146, 80, 80));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        details.setBackground(new java.awt.Color(214, 223, 231));
+        details.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 12)); // NOI18N
+        details.setForeground(new java.awt.Color(183, 206, 229));
+        details.setText("USER DETAILS");
+        details.setBorder(null);
+        details.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        details.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                detailsMouseClicked(evt);
+            }
+        });
+        details.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailsActionPerformed(evt);
+            }
+        });
+        jPanel5.add(details, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 160, 30));
+
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 580, 50));
+
+        jPanel4.setBackground(new java.awt.Color(146, 80, 80));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Appname1.setBackground(new java.awt.Color(0, 0, 0));
+        Appname1.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        Appname1.setForeground(new java.awt.Color(183, 206, 229));
+        Appname1.setText("HOST LIST");
+        jPanel4.add(Appname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, 30));
+
+        Appname2.setBackground(new java.awt.Color(0, 0, 0));
+        Appname2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        Appname2.setForeground(new java.awt.Color(183, 206, 229));
+        Appname2.setText("iBook");
+        jPanel4.add(Appname2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 50));
 
@@ -235,7 +202,7 @@ public class uform extends javax.swing.JFrame {
         avatar.setText("     ");
         jPanel6.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(146, 80, 80));
         jLabel2.setText("Host Config");
         jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
@@ -268,7 +235,7 @@ public class uform extends javax.swing.JFrame {
         });
         jPanel6.add(id3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 20, -1));
 
-        list.setForeground(new java.awt.Color(146, 80, 80));
+        list.setForeground(new java.awt.Color(255, 255, 255));
         list.setText("List of users");
         list.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         list.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -290,7 +257,7 @@ public class uform extends javax.swing.JFrame {
         Appname.setBackground(new java.awt.Color(0, 0, 0));
         Appname.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
         Appname.setForeground(new java.awt.Color(183, 206, 229));
-        Appname.setText("Admin Dashboard");
+        Appname.setText("Host Configuration");
         jPanel2.add(Appname, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
@@ -301,7 +268,7 @@ public class uform extends javax.swing.JFrame {
         acts.setForeground(new java.awt.Color(134, 163, 194));
         acts.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         acts.setText("> Home > User List");
-        jPanel2.add(acts, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, 30));
+        jPanel2.add(acts, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,89 +282,93 @@ public class uform extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseClicked
+    private void detailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detailsMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_addMouseClicked
+    }//GEN-LAST:event_detailsMouseClicked
 
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-      useradd add = new useradd();
-      add.setVisible(true);
-      add.upd.setEnabled(false);
-      add.remove.setEnabled(false);
-      this.dispose();
-    }//GEN-LAST:event_addActionPerformed
+    private void detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsActionPerformed
+//        int rowIndex = u_tbl.getSelectedRow();
+//        if(rowIndex<0){
+//            JOptionPane.showMessageDialog(null,"Select a Host.");
+//        }else{
+//            try{
+//                dbConnector db = new dbConnector();
+//                TableModel tbl = u_tbl.getModel();
+//                ResultSet rs = db.getData("SELECT * FROM tbl_user WHERE userID = '"+tbl.getValueAt(rowIndex, 0)+"'");
+//                if(rs.next()){
+//                    HostDetails user = new HostDetails();
+//                    tableprop tblp = new tableprop();
+//                    user.fn.setText(""+rs.getString("fname"));
+//                    user.ln.setText(""+rs.getString("lname"));
+//                    user.mn.setText(""+rs.getString("mname"));
+//                    user.email.setText(""+rs.getString("u_email"));
+//                    user.location.setText(""+rs.getString("u_address"));
+//                    user.usern.setText(""+rs.getString("u_name"));
+//                    user.phone.setText(""+rs.getString("u_phone"));
+//                    user.idshi.setText(""+rs.getInt("userID"));
+//                    
+//                    tblp.idd.setText(""+rs.getString("userID"));
+//
+////                    user.view.setIcon(user.ResizeImage(rs.getString("pfp"), null, user.view));
+////                    user.oldpath = rs.getString("pfp");
+////                    user.path = rs.getString("pfp");
+////                    user.destination = rs.getString("pfp");
+//                    user.setVisible(true);
+//                    this.dispose();
+//                }
+//            }catch(SQLException ex){
+//                System.out.println(""+ex);
+//            }
+//        }
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseClicked
+    int rowIndex = u_tbl.getSelectedRow(); // u_tbl here is the table in THIS frame (Admin Dashboard)
+    if(rowIndex < 0){
+        JOptionPane.showMessageDialog(null,"Select a Host.");
+    } else {
+        try{
+            dbConnector db = new dbConnector();
+            TableModel tbl = u_tbl.getModel();
+            String userIdFromTable = tbl.getValueAt(rowIndex, 0).toString();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+            ResultSet rs = db.getData("SELECT * FROM tbl_user WHERE userID = '"+ userIdFromTable +"'");
+            if(rs.next()){
+                // 1. Get the actual userID from the ResultSet
+                String userIdToPassToHostDetails = String.valueOf(rs.getInt("userID"));
 
-    private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editMouseClicked
+                // 2. Create the HostDetails instance, PASSING THE USER ID TO ITS CONSTRUCTOR
+                HostDetails user = new HostDetails(userIdToPassToHostDetails); // <--- CHANGE HERE
 
-    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-        int rowIndex = u_tbl.getSelectedRow();  
-        if(rowIndex<0){
-           JOptionPane.showMessageDialog(null,"No selected row.");
-        }else{
-           try{
-             dbConnector db = new dbConnector();
-              TableModel tbl = u_tbl.getModel();
-             ResultSet rs = db.getData("SELECT * FROM tbl_user WHERE userID = '"+tbl.getValueAt(rowIndex, 0)+"'");
-             if(rs.next()){
-             useradd user = new useradd();
-             user.fn.setText(""+rs.getString("fname"));
-             user.ln.setText(""+rs.getString("lname"));
-             user.mn.setText(""+rs.getString("mname"));
-             user.u_email.setText(""+rs.getString("u_email"));
-             user.u_location.setText(""+rs.getString("u_address"));
-             user.u_name.setText(""+rs.getString("u_name"));
-             user.pass.setText(""+rs.getString("u_pass"));
-             user.phone.setText(""+rs.getString("u_phone"));
-             user.u_role.setSelectedItem(""+rs.getString("u_role"));
-             user.u_status.setSelectedItem(""+rs.getString("u_status"));
-             user.idshet.setText(""+rs.getInt("userID"));
-             
-             user.view.setIcon(user.ResizeImage(rs.getString("pfp"), null, user.view));
-             user.oldpath = rs.getString("pfp");
-             user.path = rs.getString("pfp");
-             user.destination = rs.getString("pfp");
-             
-             
-//             if(rs.getString("pfp").isEmpty()){
-//                user.view.setEnabled(true);
-//                user.remove.setEnabled(false);
-//             }else{
-//                user.view.setEnabled(false);
-//                user.remove.setEnabled(true);
-//             }
+                // Set HostDetails fields from the ResultSet (this part is good)
+                user.fn.setText(""+rs.getString("fname"));
+                user.ln.setText(""+rs.getString("lname"));
+                user.mn.setText(""+rs.getString("mname"));
+                user.email.setText(""+rs.getString("u_email"));
+                user.location.setText(""+rs.getString("u_address"));
+                user.usern.setText(""+rs.getString("u_name"));
+                user.phone.setText(""+rs.getString("u_phone"));
+                user.idshi.setText(""+rs.getInt("userID")); // Set ID in HostDetails frame's display field
 
-String pfp = rs.getString("pfp");
-if (pfp == null || pfp.isEmpty()) {
-    user.view.setEnabled(true);
-    user.remove.setEnabled(false);
-} else {
-    user.view.setEnabled(false);
-    user.remove.setEnabled(true);
-}
+                // 3. DO NOT create or show 'tableprop' here. HostDetails will do that.
+                // tableprop tblp = new tableprop(userIdToPass); // REMOVE THIS LINE
+                // tblp.setVisible(true); // REMOVE THIS LINE
 
-             
-             user.add.setEnabled(false);
-             user.setVisible(true);
-             this.dispose();
-             }
-           }catch(SQLException ex){
-               System.out.println(""+ex);
-           }
+                user.setVisible(true); // Show the HostDetails frame
+                this.dispose();        // Close the current Admin Dashboard frame
+            } else {
+                JOptionPane.showMessageDialog(null, "User not found in database.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch(SQLException ex){
+            System.out.println("SQL Error: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            System.out.println("General Error: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "An unexpected error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_editActionPerformed
+    }
+    
+    }//GEN-LAST:event_detailsActionPerformed
 
     private void id1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_id1MouseClicked
         // TODO add your handling code here:
@@ -425,15 +396,29 @@ if (pfp == null || pfp.isEmpty()) {
 
     }//GEN-LAST:event_id2MouseEntered
 
+    private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
+        a_dash admin = new a_dash();
+        admin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_homeMouseClicked
+
+    private void homeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseEntered
+        home.setForeground(hover);
+    }//GEN-LAST:event_homeMouseEntered
+
+    private void homeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseExited
+        home.setForeground(exit);
+    }//GEN-LAST:event_homeMouseExited
+
     private void settMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settMouseClicked
         userset settings = new userset();
         settings.setVisible(true);
         if(acts.getText().contains("Settings")){
-           settings.acts.setText("> Home > Settings");
+            settings.acts.setText("> Home > Settings");
         }else{
-           settings.acts.setText(">Home > User List > Settings");
+            settings.acts.setText(">Home > User List > Settings");
         }
-        
+
         this.dispose();
     }//GEN-LAST:event_settMouseClicked
 
@@ -461,32 +446,11 @@ if (pfp == null || pfp.isEmpty()) {
 
     }//GEN-LAST:event_listMouseEntered
 
-    private void homeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseEntered
-        home.setForeground(hover);
-    }//GEN-LAST:event_homeMouseEntered
-
-    private void homeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseExited
-        home.setForeground(exit);
-    }//GEN-LAST:event_homeMouseExited
-
-    private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
-        a_dash admin = new a_dash();
-        admin.setVisible(true);
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        userset settings = new userset();
+        settings.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_homeMouseClicked
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-          Session ses = Session.getInstance();
-//        if(ses.getUid()==0){
-//           JOptionPane.showMessageDialog(null,"[ERROR] No account found, Login First.");
-//           login log = new login();
-//           log.setVisible(true);
-//           this.dispose();
-//        }else{
-           username.setText(""+ses.getUsern());
-           id.setText(""+ses.getUid());
-//        }
-    }//GEN-LAST:event_formWindowActivated
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -505,20 +469,20 @@ if (pfp == null || pfp.isEmpty()) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(uform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HostConfig.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(uform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HostConfig.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(uform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HostConfig.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(uform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HostConfig.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new uform().setVisible(true);
+                new HostConfig().setVisible(true);
             }
         });
     }
@@ -528,17 +492,16 @@ if (pfp == null || pfp.isEmpty()) {
     private javax.swing.JLabel Appname1;
     private javax.swing.JLabel Appname2;
     public javax.swing.JLabel acts;
-    private javax.swing.JButton add;
     private javax.swing.JLabel avatar;
-    private javax.swing.JButton edit;
+    private javax.swing.JButton details;
     private javax.swing.JLabel home;
     private javax.swing.JLabel id;
     private javax.swing.JLabel id1;
     private javax.swing.JLabel id2;
     private javax.swing.JLabel id3;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

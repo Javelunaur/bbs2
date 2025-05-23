@@ -301,7 +301,7 @@ public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
         jPanel5.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Properties");
+        jLabel2.setText("Host Config");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         sett.setForeground(new java.awt.Color(146, 80, 80));
@@ -350,7 +350,7 @@ public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
         jPanel5.add(list, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Bookings");
+        jLabel9.setText("Guest Config");
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 100, 330));
@@ -434,6 +434,7 @@ public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
         forgotpass3.setText("M.I.");
         jPanel2.add(forgotpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 30, 20));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Phone Number");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, -1, 20));
@@ -449,6 +450,7 @@ public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
         });
         jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 290, 30));
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setText("Email");
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 20));
@@ -464,6 +466,7 @@ public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
         });
         jPanel2.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 120, 30));
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Birthdate");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, 20));
@@ -571,7 +574,7 @@ public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Appname5, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(Appname5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(

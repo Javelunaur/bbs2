@@ -277,7 +277,7 @@ public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
         navi.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Properties");
+        jLabel2.setText("Host Config");
         navi.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         sett.setForeground(new java.awt.Color(146, 80, 80));
@@ -326,7 +326,7 @@ public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
         navi.add(list, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Bookings");
+        jLabel9.setText("Guest Config");
         navi.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jPanel1.add(navi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 100, 330));
@@ -492,7 +492,7 @@ public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Appname5, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(Appname5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -787,7 +787,7 @@ edit.addActionListener((ActionEvent e) -> {
     }//GEN-LAST:event_pfpMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-                 Session ses = Session.getInstance();
+          Session ses = Session.getInstance();
 //        if(ses.getUid()==0){
 //           JOptionPane.showMessageDialog(null,"[ERROR] No account found, Login First.");
 //           login log = new login();

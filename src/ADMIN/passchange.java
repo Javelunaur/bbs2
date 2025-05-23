@@ -36,6 +36,7 @@ public class passchange extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
         change = new javax.swing.JButton();
         search = new javax.swing.JLabel();
@@ -175,7 +176,7 @@ public class passchange extends javax.swing.JFrame {
         jPanel5.add(avatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Host Config..");
+        jLabel2.setText("Host Config");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         sett.setForeground(new java.awt.Color(146, 80, 80));
@@ -578,6 +579,7 @@ public class passchange extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel list;
     public javax.swing.JTextField newpass;
